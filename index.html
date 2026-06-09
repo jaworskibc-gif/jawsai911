@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Bryan Jaworski — AI Systems Builder. Clearview Core, VCAP, workflow automation, and AI adoption at scale. jawsai911.com">
+<title>JAWS AI — Bryan Jaworski | AI Systems Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0d14;
+  --bg2:#0d1120;
+  --s1:#111827;
+  --s2:#161e2e;
+  --s3:#1c2537;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(59,130,246,0.25);
+  --blue:#3b82f6;
+  --blue2:#60a5fa;
+  --blue3:#93c5fd;
+  --teal:#2dd4bf;
+  --amber:#f59e0b;
+  --sky:#38bdf8;
+  --text:#eef2ff;
+  --muted:#7b8db0;
+  --dim:#3d4f6e;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,13,20,0.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 40px;height:62px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;flex-direction:column;gap:1px}
+.nav-name{font-size:16px;font-weight:900;color:#fff;letter-spacing:1.5px}
+.nav-name span{color:var(--blue)}
+.nav-domain{font-size:9px;font-weight:600;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--blue2)}
+.nav-cta{font-size:12px;font-weight:700;padding:8px 18px;border-radius:6px;background:var(--blue);color:#fff;text-decoration:none;transition:background 0.2s;letter-spacing:0.3px}
+.nav-cta:hover{background:#2563eb}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 40px 60px;position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(59,130,246,0.13) 0%,transparent 60%),radial-gradient(ellipse at 20% 70%,rgba(45,212,191,0.07) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(245,158,11,0.04) 0%,transparent 40%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.04) 1px,transparent 1px);background-size:60px 60px}
+.hero-inner{position:relative;max-width:820px;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--teal);text-transform:uppercase;background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.2);border-radius:20px;padding:5px 14px;margin-bottom:24px}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero-inner h1{font-size:clamp(42px,6vw,74px);font-weight:900;line-height:1.04;color:#fff;margin-bottom:8px;letter-spacing:-1.5px}
+.hero-inner h1 .blue{color:var(--blue)}
+.hero-inner .sub{font-size:clamp(15px,2.2vw,20px);font-weight:400;color:var(--muted);margin-bottom:32px;line-height:1.6;max-width:580px}
+.hero-inner .sub strong{color:var(--blue3);font-weight:600}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.btn-primary{font-size:14px;font-weight:700;padding:13px 28px;border-radius:8px;background:var(--blue);color:#fff;text-decoration:none;transition:background 0.2s,transform 0.15s}
+.btn-primary:hover{background:#2563eb;transform:translateY(-1px)}
+.btn-outline{font-size:14px;font-weight:600;padding:13px 28px;border-radius:8px;border:1px solid var(--border);color:var(--text);text-decoration:none;background:rgba(255,255,255,0.03);transition:border-color 0.2s,background 0.2s}
+.btn-outline:hover{border-color:var(--blue);background:rgba(59,130,246,0.05)}
+.hero-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--s1);max-width:640px}
+.h-stat{flex:1;padding:16px 18px;border-right:1px solid var(--border);text-align:center}
+.h-stat:last-child{border-right:none}
+.h-stat .n{font-size:24px;font-weight:900;color:var(--blue);line-height:1;margin-bottom:3px}
+.h-stat .l{font-size:10px;font-weight:600;letter-spacing:1px;color:var(--blue3);text-transform:uppercase}
+
+/* ── SHARED SECTION ── */
+.section-wrap{padding:80px 40px;max-width:1100px;margin:0 auto}
+.full-bleed{padding:80px 40px;max-width:none}
+.full-bleed .inner{max-width:1100px;margin:0 auto}
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;color:var(--blue);text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-size:clamp(28px,4vw,40px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:14px}
+.sec-title.serif{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(30px,4vw,44px)}
+.sec-title.serif em{color:var(--sky);font-style:italic}
+.sec-desc{font-size:15px;color:var(--muted);max-width:560px;line-height:1.75;margin-bottom:48px}
+.accent-bar{height:1px;background:linear-gradient(90deg,transparent,var(--blue),var(--sky),var(--blue),transparent)}
+
+/* ── WHAT I BUILD ── */
+.build-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.build-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color 0.2s,transform 0.2s}
+.build-card:hover{border-color:var(--blue);transform:translateY(-3px)}
+.build-icon{width:44px;height:44px;border-radius:10px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+.build-card h3{font-size:15px;font-weight:800;color:#fff;margin-bottom:8px}
+.build-card p{font-size:13px;color:var(--muted);line-height:1.65}
+.build-card .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+.tag{font-size:10px;font-weight:600;padding:2px 9px;border-radius:4px;border:1px solid rgba(59,130,246,0.25);color:var(--blue2);background:rgba(59,130,246,0.06)}
+.tag.t{border-color:rgba(45,212,191,0.25);color:var(--teal);background:rgba(45,212,191,0.06)}
+.tag.a{border-color:rgba(245,158,11,0.25);color:var(--amber);background:rgba(245,158,11,0.06)}
+
+/* ── CCM PLATFORM SECTION ── */
+#ccm{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.ccm-hero{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:64px}
+.ccm-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.25);color:var(--sky);padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px}
+.ccm-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--sky);animation:pulse 2s infinite}
+.ccm-hero h2{font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,50px);color:#fff;line-height:1.1;margin-bottom:18px}
+.ccm-hero h2 em{color:var(--sky);font-style:italic}
+.ccm-hero p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:24px}
+.ccm-hero-cards{display:flex;flex-direction:column;gap:12px}
+.hcard{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:20px;transition:border-color 0.2s}
+.hcard:hover{border-color:var(--border2)}
+.hcard-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sky);margin-bottom:6px}
+.hcard-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.hcard-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.ccm-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.stat-box{background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.18);border-radius:10px;padding:16px;text-align:center}
+.stat-num{font-size:20px;font-weight:800;color:var(--sky)}
+.stat-lbl{font-size:10px;color:rgba(255,255,255,0.6);margin-top:4px;line-height:1.4}
+
+/* CCM Products */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px}
+.pcard{background:var(--s1);border-radius:14px;padding:28px;border:1px solid var(--border);transition:all 0.3s;position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--sky));opacity:0;transition:opacity 0.3s}
+.pcard:hover{border-color:var(--border2);transform:translateY(-3px)}
+.pcard:hover::before{opacity:1}
+.picon{width:44px;height:44px;border-radius:10px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.pcard h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
+.pcard p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.ptag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:4px;background:rgba(59,130,246,0.1);color:var(--sky);border:1px solid rgba(59,130,246,0.25)}
+
+/* VCA Coaches */
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px}
+.ccard{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:center;transition:all 0.25s}
+.ccard:hover{border-color:var(--border2);transform:translateY(-3px)}
+.cavatar{width:68px;height:68px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:26px;border:2px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.07)}
+.cname{font-size:16px;font-weight:700;color:#fff;margin-bottom:2px}
+.crole{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;color:var(--sky)}
+.cquote{font-size:11px;color:var(--muted);line-height:1.6;font-style:italic}
+
+/* ROI */
+.roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:40px}
+.roi-nums{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rbox{background:var(--s1);border-radius:12px;padding:22px;border:1px solid var(--border)}
+.rbox.hl{border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.06)}
+.rnum{font-size:28px;font-weight:800;color:#fff}
+.rbox.hl .rnum{color:var(--sky)}
+.rlbl{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
+.roi-quote-box{background:var(--s1);border-radius:14px;padding:36px;border:1px solid var(--border);position:relative;overflow:hidden}
+.roi-quote-box::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--blue),var(--sky))}
+.roi-qt{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;line-height:1.65;margin-bottom:16px;font-style:italic}
+.roi-attr{font-size:11px;color:var(--sky);letter-spacing:1px;font-weight:600;text-transform:uppercase}
+.ccm-cta{text-align:center;padding:40px;background:var(--s1);border-radius:16px;border:1px solid var(--border)}
+.ccm-cta h3{font-size:22px;font-weight:900;color:#fff;margin-bottom:8px}
+.ccm-cta p{font-size:14px;color:var(--muted);margin-bottom:24px}
+
+/* ── RESULTS STRIP ── */
+#results{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 40px;max-width:none}
+.results-inner{max-width:1100px;margin:0 auto}
+.results-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.result-item{text-align:center;padding:24px 16px}
+.result-item .big{font-size:38px;font-weight:900;color:var(--blue);line-height:1;margin-bottom:6px}
+.result-item .label{font-size:11px;font-weight:600;letter-spacing:1px;color:var(--blue3);text-transform:uppercase;line-height:1.4}
+
+/* ── WORK HISTORY ── */
+.timeline{position:relative}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:2px;background:linear-gradient(180deg,var(--blue),rgba(59,130,246,0.1))}
+.tl-item{padding:0 0 36px 28px;position:relative}
+.tl-dot{position:absolute;left:-5px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:2px solid var(--bg);box-shadow:0 0 12px rgba(59,130,246,0.6)}
+.tl-dates{font-size:11px;font-weight:700;color:var(--teal);letter-spacing:0.5px;margin-bottom:3px}
+.tl-role{font-size:18px;font-weight:800;color:#fff;margin-bottom:3px}
+.tl-company{font-size:13px;font-weight:600;color:var(--amber);margin-bottom:10px}
+.tl-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:10px}
+.tl-bullets{list-style:none}
+.tl-bullets li{font-size:13.5px;color:var(--text);padding:3px 0 3px 18px;position:relative;line-height:1.6}
+.tl-bullets li::before{content:'◆';color:var(--blue);font-size:7px;position:absolute;left:0;top:7px}
+.tl-bullets li strong{color:var(--blue2)}
+
+/* ── STACK ── */
+.stack-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.stack-group{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:20px 22px}
+.stack-group h4{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.stack-pills{display:flex;flex-wrap:wrap;gap:7px}
+.pill{font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid var(--border);color:var(--text);background:rgba(255,255,255,0.03)}
+
+/* ── PROJECTS ── */
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.proj-card.featured{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.proj-card.featured .proj-bullets{list-style:none;margin-top:10px}
+.proj-card.featured .proj-bullets li{font-size:13.5px;color:var(--text);padding:4px 0 4px 18px;position:relative;line-height:1.6;border-bottom:1px solid var(--border)}
+.proj-card.featured .proj-bullets li:last-child{border-bottom:none}
+.proj-card.featured .proj-bullets li::before{content:'◆';color:var(--blue);font-size:7px;position:absolute;left:0;top:8px}
+.proj-card.featured .proj-bullets li strong{color:var(--blue2)}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.proj-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color 0.2s}
+.proj-card:hover{border-color:var(--blue)}
+.proj-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.proj-name{font-size:17px;font-weight:800;color:#fff}
+.proj-badge{font-size:9px;font-weight:800;letter-spacing:1.5px;padding:3px 9px;border-radius:20px;text-transform:uppercase}
+.badge-live{background:rgba(45,212,191,0.1);border:1px solid rgba(45,212,191,0.3);color:var(--teal)}
+.badge-built{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:var(--blue2)}
+.badge-pub{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:var(--amber)}
+.proj-role{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--blue2);text-transform:uppercase;margin-bottom:10px}
+.proj-desc{font-size:13.5px;color:var(--muted);line-height:1.65}
+
+/* ── CTA ── */
+#contact{background:var(--bg2);border-top:1px solid var(--border);padding:100px 40px;text-align:center;max-width:none;position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(59,130,246,0.1) 0%,transparent 60%)}
+.contact-inner{position:relative;max-width:600px;margin:0 auto}
+#contact h2{font-size:clamp(32px,4vw,44px);font-weight:900;color:#fff;margin-bottom:12px}
+#contact p{font-size:16px;color:var(--muted);margin-bottom:36px;line-height:1.6}
+.contact-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cl{font-size:14px;font-weight:700;padding:13px 28px;border-radius:8px;text-decoration:none;transition:all 0.2s}
+.cl-primary{background:var(--blue);color:#fff}
+.cl-primary:hover{background:#2563eb;transform:translateY(-1px)}
+.cl-secondary{border:1px solid var(--border);color:var(--text);background:rgba(255,255,255,0.03)}
+.cl-secondary:hover{border-color:var(--blue);background:rgba(59,130,246,0.06)}
+.cl-demo{background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);color:var(--sky)}
+.cl-demo:hover{background:rgba(56,189,248,0.18)}
+
+/* ── FOOTER ── */
+footer{background:var(--s1);border-top:1px solid var(--border);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--dim)}
+.footer-brand{font-weight:800;font-size:13px;color:var(--text);letter-spacing:1px}
+.footer-brand span{color:var(--blue)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .section-wrap{padding:60px 20px}
+  .full-bleed{padding:60px 20px}
+  #hero{padding:90px 20px 50px}
+  .build-grid,.pgrid{grid-template-columns:1fr}
+  .ccm-hero,.roi-grid{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:1fr 1fr}
+  .results-grid{grid-template-columns:repeat(2,1fr)}
+  .stack-groups{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .proj-card.featured{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column}
+  .h-stat{border-right:none;border-bottom:1px solid var(--border)}
+  .h-stat:last-child{border-bottom:none}
+  footer{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-name">JAWS <span>AI</span></div>
+    <div class="nav-domain">jawsai911.com</div>
+  </div>
+  <div class="nav-links">
+    <a href="#build">What I Build</a>
+    <a href="#ccm">CCM Platform</a>
+    <a href="#work">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="mailto:jaworskibc@gmail.com" class="nav-cta">Get In Touch</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">AI Systems Builder · Available Remote</div>
+    <h1>I build AI systems<br>that <span class="blue">actually work.</span></h1>
+    <p class="sub">Operations leader with 10+ years in high-volume, regulated environments — now driving <strong>AI adoption, workflow automation, and enrollment intelligence</strong> at scale. I don't demo ideas. I ship systems.</p>
+    <div class="hero-btns">
+      <a href="mailto:jaworskibc@gmail.com" class="btn-primary">Let's Talk</a>
+      <a href="#ccm" class="btn-outline">See the CCM Platform</a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat"><div class="n">11→1</div><div class="l">Platforms Unified</div></div>
+      <div class="h-stat"><div class="n">$18.78M</div><div class="l">Projected Impact</div></div>
+      <div class="h-stat"><div class="n">Zero</div><div class="l">Non-Compliant Enrollments</div></div>
+      <div class="h-stat"><div class="n">1,000+</div><div class="l">Hours AI R&D</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT I BUILD -->
+<div class="section-wrap" id="build">
+  <div class="sec-label">Capabilities</div>
+  <div class="sec-title">What I Build</div>
+  <div class="sec-desc">Not a researcher. Not a theorist. I design and ship systems that run in real operating environments — regulated, high-volume, and production-grade.</div>
+  <div class="build-grid">
+    <div class="build-card">
+      <div class="build-icon">🤖</div>
+      <h3>AI Agent Architectures</h3>
+      <p>Multi-tier agent systems that handle real operational workflows — not demos. Built for reliability, compliance, and scale.</p>
+      <div class="tags"><span class="tag">OpenAI API</span><span class="tag">Claude API</span><span class="tag">MCP Servers</span><span class="tag t">Tool-Calling</span></div>
+    </div>
+    <div class="build-card">
+      <div class="build-icon">⚙️</div>
+      <h3>Workflow Automation</h3>
+      <p>End-to-end automation pipelines across CRM, communications, document generation, and approval workflows. Owned from design to deployment.</p>
+      <div class="tags"><span class="tag t">n8n</span><span class="tag t">Make</span><span class="tag t">Zapier</span><span class="tag">REST APIs</span><span class="tag a">Webhooks</span></div>
+    </div>
+    <div class="build-card">
+      <div class="build-icon">🔗</div>
+      <h3>System Integration</h3>
+      <p>Production integrations connecting AI models, CRM platforms, communication tools, and internal systems into unified operational stacks.</p>
+      <div class="tags"><span class="tag">Slack API</span><span class="tag">Google APIs</span><span class="tag t">Chrome Ext.</span><span class="tag a">E-Signature</span></div>
+    </div>
+    <div class="build-card">
+      <div class="build-icon">📈</div>
+      <h3>AI Adoption Programs</h3>
+      <p>Structured rollout of AI tools across teams that don't trust new technology — change management, training, and measurable adoption metrics.</p>
+      <div class="tags"><span class="tag a">Training Design</span><span class="tag">Onboarding</span><span class="tag t">KPI Dashboards</span></div>
+    </div>
+    <div class="build-card">
+      <div class="build-icon">🛡️</div>
+      <h3>Compliance AI</h3>
+      <p>AI-assisted compliance review built for regulated environments — Medicare, insurance, healthcare. Structural enforcement, not just monitoring.</p>
+      <div class="tags"><span class="tag">Medicare CMS</span><span class="tag a">SOC Alignment</span><span class="tag t">Audit Trails</span></div>
+    </div>
+    <div class="build-card">
+      <div class="build-icon">💬</div>
+      <h3>Real-Time AI Coaching</h3>
+      <p>Live agent assistance systems that surface the right information at the right moment on a call — without the prospect ever knowing it's there.</p>
+      <div class="tags"><span class="tag">VCAP</span><span class="tag t">Real-Time NLP</span><span class="tag a">Sales Enablement</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="accent-bar"></div>
+
+<!-- CCM PLATFORM -->
+<div id="ccm" class="full-bleed">
+  <div class="inner">
+
+    <div class="ccm-badge">Flagship Build · Live</div>
+
+    <div class="ccm-hero">
+      <div>
+        <h2>One Platform.<br>Every Call.<br><em>Every Agent.</em></h2>
+        <p>Complete Care Marketing Inc. builds enrollment intelligence and AI coaching systems for Medicare telesales operations. One screen replaces eleven systems. Every agent performs like a veteran from day one.</p>
+        <p style="font-size:13px;color:var(--dim)">Built solo — no engineering team. Design to deployment in 36 hours for v1.</p>
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+          <a href="mailto:bryan@completecaremarketinginc.com" class="btn-primary">Request a Demo</a>
+          <a href="mailto:bryan@completecaremarketinginc.com" class="btn-outline">Contact Bryan</a>
+        </div>
+      </div>
+      <div class="ccm-hero-cards">
+        <div class="hcard">
+          <div class="hcard-label">Clearview Core</div>
+          <div class="hcard-title">One Screen. Every System.</div>
+          <div class="hcard-desc">Replaces 11 separate platforms agents juggle on every call. Real-time payer rules, compliance engine, and enrollment — unified.</div>
+        </div>
+        <div class="hcard">
+          <div class="hcard-label">VCAP — Virtual Coaching Assistant Platform</div>
+          <div class="hcard-title">Every Agent Has Their Own AI Coach</div>
+          <div class="hcard-desc">Real-time coaching on every live call. Agents see the right response the moment they need it. The prospect never hears the AI.</div>
+        </div>
+        <div class="ccm-stat-row">
+          <div class="stat-box"><div class="stat-num">$18.78M</div><div class="stat-lbl">Projected Annual Impact</div></div>
+          <div class="stat-box"><div class="stat-num">Zero</div><div class="stat-lbl">Non-Compliant Enrollments</div></div>
+          <div class="stat-box"><div class="stat-num">3–5 Days</div><div class="stat-lbl">Agent Training vs 4 Weeks</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products -->
+    <div class="sec-label" style="margin-bottom:10px">The Platform</div>
+    <div class="sec-title" style="margin-bottom:40px">Built Specifically for<br>Medicare Telesales</div>
+    <div class="pgrid">
+      <div class="pcard">
+        <div class="picon" style="background:rgba(59,130,246,0.1)">🖥️</div>
+        <h3>Clearview Core</h3>
+        <p>Unified enrollment intelligence replacing EnrollHere, Sunfire, MARX, TrueTrack, SharePoint, UHone Portal, RPASS, and more. One screen. Every carrier. Every call.</p>
+        <span class="ptag">Enrollment Platform</span>
+      </div>
+      <div class="pcard">
+        <div class="picon" style="background:rgba(56,189,248,0.1)">🤖</div>
+        <h3>VCAP</h3>
+        <p>Virtual Coaching Assistant Platform. Every agent gets their own personal VCA — named by them, learning their style, coaching them on every live call in real time.</p>
+        <span class="ptag">AI Coaching</span>
+      </div>
+      <div class="pcard">
+        <div class="picon" style="background:rgba(45,212,191,0.1)">🎓</div>
+        <h3>Clearview Onboard</h3>
+        <p>New agent training drops from 4 weeks of paid non-producing time to 3–5 days. Agents are on phones with their VCA coaching them from day one.</p>
+        <span class="ptag">Agent Training</span>
+      </div>
+    </div>
+
+    <!-- VCA Coaches -->
+    <div class="sec-label" style="margin-bottom:10px">VCAP Coaches</div>
+    <div class="sec-title" style="margin-bottom:12px;font-size:28px">Meet the VCA Team</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:32px">Every agent picks their coach on day one. Named by them. Theirs for their entire career.</p>
+    <div class="cgrid">
+      <div class="ccard">
+        <div class="cavatar">🎯</div>
+        <div class="cname">Dale</div>
+        <div class="crole">The Closer</div>
+        <div class="cquote">"Every call ends in a close. No exceptions."</div>
+      </div>
+      <div class="ccard">
+        <div class="cavatar">🌟</div>
+        <div class="cname">Donna</div>
+        <div class="crole">The Mentor</div>
+        <div class="cquote">"Building something real together — one call, one win at a time."</div>
+      </div>
+      <div class="ccard">
+        <div class="cavatar">🧠</div>
+        <div class="cname">Carrie</div>
+        <div class="crole">The Strategist</div>
+        <div class="cquote">"Let's map this call out together — step by step."</div>
+      </div>
+      <div class="ccard">
+        <div class="cavatar">⚡</div>
+        <div class="cname">Sean</div>
+        <div class="crole">The Motivator</div>
+        <div class="cquote">"You have everything you need. Let's go take some names."</div>
+      </div>
+    </div>
+
+    <!-- ROI -->
+    <div class="sec-label" style="margin-bottom:10px">Return on Investment</div>
+    <div class="sec-title" style="margin-bottom:40px">The Numbers That<br>Close the Room</div>
+    <div class="roi-grid">
+      <div class="roi-nums">
+        <div class="rbox"><div class="rnum">15–20%</div><div class="rlbl">Production increase from unified platform adoption</div></div>
+        <div class="rbox"><div class="rnum">30–40%</div><div class="rlbl">Reduction in agent turnover with personalized VCA coaching</div></div>
+        <div class="rbox"><div class="rnum">60–75%</div><div class="rlbl">Reduction in training costs — weeks replaced by days</div></div>
+        <div class="rbox hl"><div class="rnum">Zero</div><div class="rlbl">Non-compliant enrollments through structural compliance enforcement</div></div>
+      </div>
+      <div class="roi-quote-box">
+        <div class="roi-qt">"Based on industry benchmarks, these numbers scale with your operation. The larger your team, the greater the impact. The investment stays proportional — the return doesn't."</div>
+        <div class="roi-attr">Complete Care Marketing Inc. — Industry Benchmark Projections</div>
+      </div>
+    </div>
+
+    <div class="ccm-cta">
+      <h3>Ready to See It Live?</h3>
+      <p>Schedule a demo and see how Clearview Core and VCAP perform on a real call scenario.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="mailto:bryan@completecaremarketinginc.com" class="btn-primary">Schedule a Demo</a>
+        <a href="mailto:bryan@completecaremarketinginc.com" class="cl cl-demo" style="padding:13px 28px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none">Contact Bryan Directly</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="accent-bar"></div>
+
+<!-- RESULTS -->
+<div id="results" class="full-bleed">
+  <div class="results-inner">
+    <div class="results-grid">
+      <div class="result-item"><div class="big">11→1</div><div class="label">Systems Consolidated</div></div>
+      <div class="result-item"><div class="big">Zero</div><div class="label">Non-Compliant Enrollments</div></div>
+      <div class="result-item"><div class="big">36hrs</div><div class="label">v1 Build Time</div></div>
+      <div class="result-item"><div class="big">3–5d</div><div class="label">Agent Training vs 4 Weeks</div></div>
+      <div class="result-item"><div class="big">$18.78M</div><div class="label">Projected Annual Impact</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section-wrap" id="work">
+  <div class="sec-label">Work History</div>
+  <div class="sec-title">Where I've Been</div>
+  <div class="sec-desc">A decade building real systems in regulated, high-stakes environments before adding AI to the stack.</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-dates">2025 — Present</div>
+      <div class="tl-role">Founder & AI Systems Architect</div>
+      <div class="tl-company">Complete Care Marketing Inc. (CCM)</div>
+      <div class="tl-desc">Built a 3-tier AI operations platform for Medicare telesales from the ground up — solo, no engineering team. Clearview Core (enrollment intelligence), VCAP (AI coaching), and Clearview Onboard (training acceleration).</div>
+      <ul class="tl-bullets">
+        <li>Replaced <strong>11 separate platforms</strong> with a single unified enrollment intelligence screen</li>
+        <li>Architected VCAP — real-time AI coaching on live calls without the prospect knowing</li>
+        <li>Reduced agent onboarding from <strong>4 weeks to 3–5 days</strong></li>
+        <li>Projected <strong>$18.78M+ annual operational impact</strong> across mid-size telesales operations</li>
+        <li>Zero non-compliant enrollments through structural CMS compliance enforcement</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-dates">2025 — 2026</div>
+      <div class="tl-role">Licensed Insurance Agent / AI Process Lead</div>
+      <div class="tl-company">HealthPlanOne / HPOne</div>
+      <div class="tl-desc">Medicare telesales specialist in a high-volume licensed call center environment. Used direct operational experience to inform the design of the CCM platform systems.</div>
+      <ul class="tl-bullets">
+        <li>Worked across <strong>multiple carrier systems</strong> simultaneously on live calls</li>
+        <li>Identified platform consolidation opportunities that became Clearview Core</li>
+        <li>Applied compliance requirements firsthand — directly shaped VCAP coaching logic</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-dates">2022 — 2025</div>
+      <div class="tl-role">Licensed Insurance Agent / Operations</div>
+      <div class="tl-company">TailorMade Insurance Group</div>
+      <div class="tl-desc">Multi-line insurance sales and operations in an independent agency environment. Built early automation and workflow systems for quoting and client management.</div>
+      <ul class="tl-bullets">
+        <li>First exposure to <strong>workflow automation</strong> in an insurance context</li>
+        <li>Built internal tools to reduce quote turn-around time</li>
+        <li>Managed complex multi-carrier client portfolios under compliance requirements</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-dates">Prior</div>
+      <div class="tl-role">Founder / Operations</div>
+      <div class="tl-company">All Family Pharmacy / Trusted Medical Group</div>
+      <div class="tl-desc">Built and operated an online pharmacy from zero — e-commerce, vendor relationships, compliance frameworks, and fulfillment logistics. End-to-end entrepreneurial operation.</div>
+      <ul class="tl-bullets">
+        <li>Built the full operational stack independently — no template, no playbook</li>
+        <li>Navigated federal and state pharmacy compliance requirements</li>
+        <li>First taste of building something real under regulated constraints</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- STACK -->
+<div class="section-wrap" id="stack" style="padding-top:0">
+  <div class="sec-label">Tech Stack</div>
+  <div class="sec-title">What I Work With</div>
+  <div class="sec-desc" style="margin-bottom:32px">The tools and platforms I use to design, build, and deploy AI systems in production environments.</div>
+  <div class="stack-groups">
+    <div class="stack-group">
+      <h4>AI / LLMs</h4>
+      <div class="stack-pills">
+        <span class="pill">Claude API</span><span class="pill">OpenAI API</span><span class="pill">GPT-4o</span><span class="pill">Claude 3.5 Sonnet</span><span class="pill">Prompt Engineering</span><span class="pill">MCP Servers</span><span class="pill">Tool-Calling</span><span class="pill">RAG</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <h4>Automation</h4>
+      <div class="stack-pills">
+        <span class="pill">n8n</span><span class="pill">Make (Integromat)</span><span class="pill">Zapier</span><span class="pill">Webhooks</span><span class="pill">REST APIs</span><span class="pill">Google Apps Script</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <h4>Platforms & Integrations</h4>
+      <div class="stack-pills">
+        <span class="pill">Slack API</span><span class="pill">Google APIs</span><span class="pill">Chrome Extensions</span><span class="pill">HubSpot</span><span class="pill">DocuSign</span><span class="pill">Twilio</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <h4>Build & Deploy</h4>
+      <div class="stack-pills">
+        <span class="pill">HTML / CSS / JS</span><span class="pill">Node.js</span><span class="pill">Python</span><span class="pill">GitHub</span><span class="pill">Netlify</span><span class="pill">Supabase</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="section-wrap" id="projects" style="padding-top:0">
+  <div class="sec-label">Built &amp; Shipped</div>
+  <div class="sec-title">Projects</div>
+  <div class="sec-desc" style="margin-bottom:32px">A track record of building real products — not prototypes.</div>
+  <div class="projects-grid">
+    <div class="proj-card featured">
+      <div class="proj-left">
+        <div class="proj-header">
+          <div class="proj-name">CCM Platform — Clearview Core + VCAP</div>
+          <span class="proj-badge badge-live">Live</span>
+        </div>
+        <div class="proj-role">Founder &amp; Architect · Complete Care Marketing Inc.</div>
+        <div class="proj-desc">3-tier AI operations platform for regulated Medicare telesales. Workflow automation, AI-powered compliance review, real-time agent coaching, Chrome tooling, Slack webhooks, and document pipelines — built solo from the ground up.</div>
+        <div class="proj-tags">
+          <span class="tag">Claude API</span><span class="tag">OpenAI</span><span class="tag t">n8n</span><span class="tag t">Chrome Ext.</span><span class="tag a">Medicare CMS</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:12px">Key Outcomes</div>
+        <ul class="proj-bullets">
+          <li>Consolidated <strong>11 platforms into 1 screen</strong> — zero tab-switching on calls</li>
+          <li>Reduced agent training time by <strong>60–75%</strong></li>
+          <li>Projected <strong>$18.78M+ annual impact</strong> at scale</li>
+          <li>Structurally enforces CMS compliance — <strong>zero non-compliant enrollments</strong></li>
+          <li>4 VCA coach personas — agents pick and name their own AI coach</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-name">Six Pack Stacked Body</div>
+        <span class="proj-badge badge-pub">Publishing</span>
+      </div>
+      <div class="proj-role">Author · Fitness E-Book + App Bundle</div>
+      <div class="proj-desc">Fitness e-book and companion workout tracking app — sold as a Gumroad bundle. App includes workout logging, body stats, progress photos with before/after comparison, and weight chart. Built as a full-stack single-file HTML app.</div>
+      <div class="proj-tags" style="margin-top:12px">
+        <span class="tag t">Gumroad</span><span class="tag">HTML App</span><span class="tag a">LocalStorage</span><span class="tag">Canvas API</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-name">SNG Technical E-Books</div>
+        <span class="proj-badge badge-pub">Publishing</span>
+      </div>
+      <div class="proj-role">Author · AI-Assisted Technical Writing · SNG Cycles</div>
+      <div class="proj-desc">A series of build guides for electric powersports enthusiasts — written with AI as co-author. Covers complete vehicle builds from frame selection through final tune. Built for builders who want real specs, not YouTube theory.</div>
+      <div class="proj-tags" style="margin-top:12px">
+        <span class="tag t">LBX Frame-Up</span><span class="tag t">270-E Light Bee</span><span class="tag t">CRF450 52kW</span><span class="tag t">Jackshaft System</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-name">Online Pharmacy</div>
+        <span class="proj-badge badge-built">Built</span>
+      </div>
+      <div class="proj-role">Founder · End-to-End Build · All Family Pharmacy</div>
+      <div class="proj-desc">Built and launched a fully operational online pharmacy — e-commerce platform, vendor relationships, compliance frameworks, and logistics workflows built independently from zero.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div id="contact">
+  <div class="contact-inner">
+    <h2>Let's build something.</h2>
+    <p>Open to AI Success Manager, AI Ops, AI Adoption, Implementation, and related roles — remote preferred, results guaranteed. Also available for CCM platform demos.</p>
+    <div class="contact-links">
+      <a href="mailto:jaworskibc@gmail.com" class="cl cl-primary">jaworskibc@gmail.com</a>
+      <a href="mailto:bryan@completecaremarketinginc.com" class="cl cl-demo">CCM Demo Request</a>
+      <a href="/resume.html" class="cl cl-secondary">View Resume</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">JAWS <span>AI</span></div>
+    <div style="font-size:11px;color:var(--dim);margin-top:2px">jawsai911.com · Bryan Jaworski © 2026</div>
+  </div>
+  <span>Built with AI · Royal Palm Beach, FL · Open to Remote</span>
+</footer>
+
+</body>
+</html>

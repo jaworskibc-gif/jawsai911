@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bryan Jaworski — AI Success Manager | jawsai911.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: letter portrait; margin: 0; }
+  html, body { height: 100%; }
+
+  body {
+    background: #0a0d14;
+    color: #eef2ff;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 11.5px;
+    width: 816px;
+    margin: 0 auto;
+    min-height: 1056px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: #060810;
+    padding: 16px 24px 13px;
+    border-bottom: 3px solid #3b82f6;
+  }
+  .header h1 {
+    font-size: 38px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .header .subtitle {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #2dd4bf;
+    margin-bottom: 9px;
+    text-transform: uppercase;
+  }
+  .header .contact {
+    font-size: 11px;
+    color: #7b8db0;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .header .contact span { color: #3b82f6; font-weight: 600; }
+
+  /* ── ACCENT BAR ── */
+  .accent-bar {
+    background: #0d1120;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    padding: 8px 24px;
+    gap: 0;
+  }
+  .accent-item {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    padding: 0 8px;
+  }
+  .accent-item:last-child { border-right: none; }
+  .accent-num {
+    font-size: 18px;
+    font-weight: 900;
+    color: #3b82f6;
+    display: block;
+    line-height: 1.1;
+  }
+  .accent-label {
+    font-size: 7.5px;
+    color: #7b8db0;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ── BODY ── */
+  .body { display: flex; }
+
+  .sidebar {
+    width: 182px;
+    flex-shrink: 0;
+    background: #111827;
+    padding: 13px 11px;
+    border-right: 1px solid rgba(255,255,255,0.07);
+  }
+  .sb-section { margin-bottom: 13px; }
+  .sb-title {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #3b82f6;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .comp-badge {
+    display: block;
+    border: 1px solid rgba(59,130,246,0.25);
+    background: rgba(59,130,246,0.06);
+    color: #eef2ff;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    text-align: center;
+  }
+
+  .sb-item {
+    font-size: 10px;
+    color: #7b8db0;
+    padding: 1.5px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    line-height: 1.4;
+  }
+  .sb-item::before { content: '▸'; color: #2dd4bf; font-size: 8px; flex-shrink: 0; margin-top: 1px; }
+
+  .cert-carrier {
+    display: inline-block;
+    border: 1px solid rgba(59,130,246,0.3);
+    color: #60a5fa;
+    font-size: 8.5px;
+    padding: 1.5px 5px;
+    border-radius: 2px;
+    margin: 1.5px 1.5px 1.5px 0;
+  }
+
+  /* ── MAIN ── */
+  .main { flex: 1; padding: 13px 18px; }
+
+  .section-hdr {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: #3b82f6;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .summary-block {
+    background: #0d1120;
+    border-left: 3px solid #2dd4bf;
+    padding: 10px 14px;
+    margin-bottom: 13px;
+    border-radius: 0 5px 5px 0;
+    font-size: 11px;
+    line-height: 1.65;
+    color: #eef2ff;
+  }
+
+  /* ── JOB ── */
+  .job { margin-bottom: 11px; }
+  .job-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+  .job-title { font-size: 13px; font-weight: 800; color: #ffffff; }
+  .job-dates { font-size: 10.5px; font-weight: 700; color: #2dd4bf; }
+  .job-company { font-size: 10.5px; color: #60a5fa; font-weight: 600; margin-bottom: 5px; }
+  .job-bullet {
+    font-size: 11px;
+    color: #eef2ff;
+    padding: 2.5px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    line-height: 1.55;
+  }
+  .job-bullet::before {
+    content: '◆';
+    color: #3b82f6;
+    font-size: 6.5px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .hl { color: #f59e0b; font-weight: 700; }
+  .hl-blue { color: #2dd4bf; font-weight: 700; }
+
+  /* ── ACHIEVEMENTS ── */
+  .ach-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 13px;
+  }
+  .ach-item {
+    background: #0d1120;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: 3px solid #3b82f6;
+    border-radius: 0 4px 4px 0;
+    padding: 7px 10px;
+    font-size: 10.5px;
+    color: #eef2ff;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .ach-item::before {
+    content: '✓';
+    color: #2dd4bf;
+    font-weight: 900;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #060810;
+    border-top: 3px solid #3b82f6;
+    padding: 7px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8.5px;
+    color: #3d4f6e;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .footer-dot { color: #3b82f6; font-size: 13px; }
+
+  @media screen {
+    html { background: #060810; }
+    body {
+      zoom: 1.45;
+      margin: 24px auto;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.6);
+    }
+  }
+  @media print {
+    body { zoom: 1; margin: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>BRYAN JAWORSKI</h1>
+  <div class="subtitle">AI Success Manager &nbsp;·&nbsp; AI Adoption &amp; Change Management &nbsp;·&nbsp; Customer Operations &nbsp;·&nbsp; Process Improvement</div>
+  <div class="contact">
+    <span>✉ jaworskibc@gmail.com</span>
+    <span>⚑ Royal Palm Beach, FL · Remote</span>
+    <span>Licensed Medicare Insurance Professional</span>
+  </div>
+</div>
+
+<div class="accent-bar">
+  <div class="accent-item">
+    <span class="accent-num">11</span>
+    <span class="accent-label">Integrated Systems Built</span>
+  </div>
+  <div class="accent-item">
+    <span class="accent-num">1 Screen</span>
+    <span class="accent-label">Unified Agent Workflow View</span>
+  </div>
+  <div class="accent-item">
+    <span class="accent-num">0</span>
+    <span class="accent-label">High-Risk Calls Missed</span>
+  </div>
+  <div class="accent-item">
+    <span class="accent-num">1 System</span>
+    <span class="accent-label">CCM Intelligent Enrollment Platform</span>
+  </div>
+</div>
+
+<div class="body">
+
+  <div class="sidebar">
+
+    <div class="sb-section">
+      <div class="sb-title">Core Competencies</div>
+      <span class="comp-badge">AI Adoption &amp; Change Mgmt</span>
+      <span class="comp-badge">Customer Success</span>
+      <span class="comp-badge">Contact Center Ops</span>
+      <span class="comp-badge">Workflow Design</span>
+      <span class="comp-badge">Stakeholder Management</span>
+      <span class="comp-badge">Process Improvement</span>
+      <span class="comp-badge">Executive Communication</span>
+      <span class="comp-badge">KPI &amp; Data Analysis</span>
+      <span class="comp-badge">Quality Assurance</span>
+      <span class="comp-badge">Team Development</span>
+      <span class="comp-badge">Root Cause Analysis</span>
+      <span class="comp-badge">SaaS &amp; CRM Platforms</span>
+      <span class="comp-badge">Project Management</span>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">AI &amp; Technology</div>
+      <div class="sb-item">ChatGPT · Claude · Gemini</div>
+      <div class="sb-item">AI Workflow Design &amp; Automation</div>
+      <div class="sb-item">Prompt Engineering</div>
+      <div class="sb-item">Process Automation Tools</div>
+      <div class="sb-item">CRM &amp; Contact Center Software</div>
+      <div class="sb-item">Reporting &amp; Analytics</div>
+      <div class="sb-item">Microsoft Office · Google Workspace</div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Certifications</div>
+      <div class="sb-item" style="margin-bottom:5px;">Licensed Medicare Insurance Professional</div>
+      <span class="cert-carrier">UnitedHealthcare</span>
+      <span class="cert-carrier">Humana</span>
+      <span class="cert-carrier">Aetna</span>
+      <span class="cert-carrier">Wellcare</span>
+      <span class="cert-carrier">Blue Cross NC</span>
+      <span class="cert-carrier">Devoted Health</span>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Additional Training</div>
+      <div class="sb-item">Medicare Compliance</div>
+      <div class="sb-item">Customer Experience</div>
+      <div class="sb-item">Quality Assurance</div>
+      <div class="sb-item">Sales Operations</div>
+      <div class="sb-item">Contact Center Performance</div>
+    </div>
+
+  </div>
+
+  <div class="main">
+
+    <div class="section-hdr">Professional Summary</div>
+    <div class="summary-block">
+      Customer-focused operations leader with deep experience helping organizations improve performance through <strong style="color:#2dd4bf;">AI adoption, workflow automation, process optimization, and stakeholder alignment.</strong> Background spans contact center leadership, team development, QA, and large-scale workflow improvement in regulated environments. Passionate about translating AI and automation from experimentation into scalable, adoption-ready systems that drive measurable results.
+    </div>
+
+    <div class="section-hdr">Professional Experience</div>
+
+    <div class="job">
+      <div class="job-top">
+        <div class="job-title">Medicare Sales &amp; Operations</div>
+        <div class="job-dates">2025 – 2026</div>
+      </div>
+      <div class="job-company">HealthPlanOne (HPOne) · Remote</div>
+      <div class="job-bullet">Guided customers through complex Medicare enrollment while maintaining strict regulatory compliance — balancing customer advocacy, compliance, and business objectives simultaneously.</div>
+      <div class="job-bullet">Collaborated with compliance, QA, operations, and leadership to <span class="hl">identify friction points and drive process improvements</span> that enhanced efficiency and customer satisfaction.</div>
+      <div class="job-bullet">Utilized CRM platforms and operational systems to improve customer outcomes and enrollment efficiency in a high-volume remote environment.</div>
+    </div>
+
+    <div class="job">
+      <div class="job-top">
+        <div class="job-title">Call Center Medicare Sales Manager</div>
+        <div class="job-dates">2022 – 2025</div>
+      </div>
+      <div class="job-company">TailorMade Insurance Group</div>
+      <div class="job-bullet">Recruited, trained, coached, and managed high-performing contact center teams — developing <span class="hl">QA programs, coaching frameworks, and performance management systems</span> from the ground up.</div>
+      <div class="job-bullet">Led KPI tracking, reporting, workflow optimization, and continuous improvement initiatives in direct partnership with executive leadership.</div>
+      <div class="job-bullet"><span class="hl-blue">Successfully drove adoption of new processes, technologies, and operational best practices</span> while maintaining strong team engagement and performance metrics.</div>
+      <div class="job-bullet">Managed cross-functional initiatives spanning sales, compliance, training, customer service, and operations.</div>
+    </div>
+
+    <div class="job">
+      <div class="job-top">
+        <div class="job-title">Operations &amp; Customer Experience Leadership</div>
+        <div class="job-dates">Prior</div>
+      </div>
+      <div class="job-company">All Family Pharmacy / Trusted Medical Group</div>
+      <div class="job-bullet">Improved workflows, service delivery processes, customer communication standards, and operational performance in highly regulated healthcare environments. Supported leadership on organizational growth and CX initiatives.</div>
+    </div>
+
+    <div class="section-hdr">Key Achievements</div>
+    <div class="ach-grid">
+      <div class="ach-item">Supported teams responsible for 1,800+ compliant Medicare enrollments in a single 12-month period</div>
+      <div class="ach-item">Built &amp; deployed a 3-tier AI-assisted workflow platform — zero compliance failures across all monitored processes</div>
+      <div class="ach-item">Developed scalable QA and onboarding processes that improved efficiency while maintaining regulatory compliance</div>
+      <div class="ach-item">Early adopter of AI tools (ChatGPT, Claude, Gemini) — built live automation workflows improving productivity and decision-making</div>
+      <div class="ach-item">Translated complex regulations, products, and processes into clear customer-facing and team-facing solutions</div>
+      <div class="ach-item">Led agent onboarding, coaching, QA, performance management, and continuous improvement simultaneously</div>
+    </div>
+
+    <div class="section-hdr">Current Venture — SNG Cycles</div>
+    <div class="job">
+      <div class="job-top">
+        <div class="job-title">Founder &amp; AI-Powered Builder</div>
+        <div class="job-dates">2024 – Present</div>
+      </div>
+      <div class="job-company">SNG Cycles · Electric Performance Powersports · Royal Palm Beach, FL</div>
+      <div class="job-bullet">Uses AI as a co-engineer to <span class="hl">solve real engineering problems</span> — motor selection, controller tuning, jackshaft geometry, suspension spec — reasoning through technical challenges with AI as a build partner</div>
+      <div class="job-bullet">Produces <span class="hl-blue">AI-generated digital blueprints and full build documentation</span> for every custom vehicle configuration: frame geometry, drivetrain specs, component schematics</div>
+      <div class="job-bullet">Authored a <span class="hl">series of technical e-books</span> covering complete EV builds — LBX frame-up, 270-E Light Bee, CRF450 52kW conversion, jackshaft system, A+ trike — AI-assisted technical writing throughout</div>
+      <div class="job-bullet">Uses AI for <span class="hl-blue">build scheduling and project management</span> — parts sequencing, lead time tracking, milestone planning across 3 active vehicle platforms</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <span>BRYAN JAWORSKI &nbsp;·&nbsp; AI SUCCESS MANAGER</span>
+  <span class="footer-dot">●</span>
+  <span>jaworskibc@gmail.com &nbsp;·&nbsp; CONFIDENTIAL</span>
+</div>
+
+</body>
+</html>

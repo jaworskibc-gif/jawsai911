@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>JAWSAI911.com — Your AI Incident Command Center</title>
-<meta name="description" content="Bryan Jaworski — AI Systems Builder. AI operations, workflow automation, enrollment intelligence, and live AI coaching. jawsai911.com">
+<title>About | JAWSAI911</title>
+<meta name="description" content="JAWSAI911.com — Your AI Incident Command Center">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -77,19 +77,6 @@ background-size:42px 34px,52px 38px,44px 32px,56px 42px,100% 100%,100% 100%;opac
 .btn-hero-primary:hover{background:#0862f0;transform:translateY(-2px)}
 .btn-hero-ghost{display:inline-flex;align-items:center;gap:13px;font-size:15px;font-weight:700;padding:16px 36px;border-radius:7px;background:rgba(1,8,20,0.55);color:#fff;text-decoration:none;border:1px solid rgba(72,129,190,0.55);letter-spacing:0.2px;text-transform:uppercase;transition:all 0.2s}
 .btn-hero-ghost:hover{border-color:var(--blue);background:rgba(59,130,246,0.1)}
-.lead-form-card{position:relative;z-index:3;width:min(920px,100%);margin:30px auto 0;background:rgba(3,12,25,0.82);border:1px solid rgba(42,123,214,0.46);border-radius:14px;padding:18px;box-shadow:0 0 30px rgba(0,91,255,0.15),inset 0 0 26px rgba(10,68,140,0.18)}
-.lead-form-card h2{font-size:18px;color:#fff;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px}
-.lead-form-card p{font-size:13px;color:#9fb2d0;margin-bottom:14px}
-.lead-form{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.lead-form input,.lead-form select,.lead-form textarea{width:100%;background:rgba(8,18,34,0.9);border:1px solid rgba(59,130,246,0.28);border-radius:7px;color:#fff;padding:11px 12px;font-family:inherit;font-size:13px;outline:none}
-.lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{border-color:var(--sky);box-shadow:0 0 0 2px rgba(56,189,248,0.08)}
-.lead-form select{cursor:pointer}
-.lead-form textarea{min-height:44px;resize:vertical}
-.lead-form .wide{grid-column:span 2}
-.lead-form .full{grid-column:1/4}
-.lead-form button{background:linear-gradient(180deg,#0877ff,#0052dc);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;cursor:pointer}
-.lead-form button:hover{background:#0862f0}
-.form-status{font-size:12px;color:var(--teal);margin-top:10px;min-height:18px}
 
 /* ── FEATURE CARDS STRIP ── */
 .feature-strip{position:relative;z-index:2;width:100%;max-width:1390px;background:rgba(3,12,25,0.72);border:1px solid rgba(42,123,214,0.42);border-radius:16px;margin-top:42px;padding:0;box-shadow:0 0 38px rgba(0,91,255,0.16),inset 0 0 32px rgba(10,68,140,0.22);overflow:hidden}
@@ -272,9 +259,6 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
   .hero-content{padding:8px 0 0}
   .hero-btns{gap:12px}
   .btn-hero-primary,.btn-hero-ghost{font-size:12px;padding:13px 18px}
-  .lead-form{grid-template-columns:1fr 1fr}
-  .lead-form .wide,.lead-form .full{grid-column:1/-1}
-  .lead-form button{min-height:42px}
   .feature-strip{margin-top:30px;border-radius:12px}
   .section-wrap{padding:60px 20px}
   .full-bleed{padding:60px 20px}
@@ -296,8 +280,6 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
 }
 @media(max-width:560px){
   .nav-cta{display:none}
-  .lead-form{grid-template-columns:1fr}
-  .lead-form .wide,.lead-form .full{grid-column:1}
   .feature-cards{grid-template-columns:1fr}
   .fc:nth-child(odd){border-right:none}
 }
@@ -314,15 +296,15 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="solutions.html">Solutions</a></li>
     <li><a href="platform.html">Platform</a></li>
     <li><a href="resources.html">Resources</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="about.html" class="active">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <a href="#landing-form" class="nav-cta">Request Demo</a>
+    <a href="contact.html" class="nav-cta">Request Demo</a>
   </div>
 </nav>
 <!-- PORTAL MODAL -->
@@ -339,104 +321,151 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
 </div>
 
 
-<!-- HERO -->
-<section id="hero">
-  <canvas id="hero-canvas"></canvas>
-  <div class="hero-content">
-    <img src="jawsai911-logo2.jpeg" class="hero-logo-img" alt="JAWSAI911.com — Your AI Incident Command Center">
-    <div class="hero-headline">When Seconds Matter, Intelligence Leads.</div>
-    <div class="hero-sub">AI-Powered Situational Awareness. &nbsp;Real-Time Decisions. &nbsp;Better Outcomes.</div>
-    <div class="hero-btns">
-      <a href="platform.html" class="btn-hero-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        Explore Platform
-      </a>
-      <a href="#landing-form" class="btn-hero-ghost">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Request Demo
-      </a>
+<div style="height:118px"></div>
+<div class="section-wrap" id="work">
+  <div class="sec-label">Work History</div>
+  <div class="sec-title">Where I've Been</div>
+  <div class="sec-desc">A decade building real systems in regulated, high-stakes environments before adding AI to the stack.</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-dates">2025 — Present</div>
+      <div class="tl-role">Founder & AI Systems Architect</div>
+      <div class="tl-company">Complete Care Marketing Inc. (CCM)</div>
+      <div class="tl-desc">Built a 3-tier AI operations platform for Medicare telesales from the ground up — solo, no engineering team. CCM Enrollment Core (enrollment intelligence), VCAP (AI coaching), and CCM Onboard (training acceleration).</div>
+      <ul class="tl-bullets">
+        <li>Replaced <strong>11 separate platforms</strong> with a single unified enrollment intelligence screen</li>
+        <li>Architected VCAP — real-time AI coaching on live calls without the prospect knowing</li>
+        <li>Reduced agent onboarding from <strong>4 weeks to 3–5 days</strong></li>
+        <li>Zero non-compliant enrollments through structural CMS compliance enforcement</li>
+      </ul>
     </div>
-    <div class="lead-form-card" id="landing-form">
-      <h2>Request a Demo</h2>
-      <p>Tell me who you are and what you want AI to fix. I will follow up directly.</p>
-      <form class="lead-form" onsubmit="submitDemoRequest(event)">
-        <input name="name" type="text" placeholder="Name *" required>
-        <input name="email" type="email" placeholder="Email *" required>
-        <input name="phone" type="tel" placeholder="Phone">
-        <input name="organization" type="text" placeholder="Company / Agency">
-        <select name="ai_currently" aria-label="Do you currently use AI?">
-          <option value="">Using AI currently?</option>
-          <option value="yes">Yes</option>
-          <option value="some">A little / testing</option>
-          <option value="no">No</option>
-        </select>
-        <textarea class="wide" name="ai_use_case" placeholder="If yes, what are you using AI for?"></textarea>
-        <textarea class="full" name="need" placeholder="What do you need help with?"></textarea>
-        <button type="submit">Submit</button>
-      </form>
-      <div class="form-status" id="landing-form-status"></div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-dates">2025 — 2026</div>
+      <div class="tl-role">Sales Team Leader</div>
+      <div class="tl-company">Health Plan One</div>
+      <div class="tl-desc">Led Medicare telesales team across AEP/OEP cycles — applying the same operational systems and compliance frameworks built over a decade.</div>
+      <ul class="tl-bullets">
+        <li>Worked across <strong>multiple carrier systems</strong> simultaneously on live calls</li>
+        <li>Identified platform consolidation opportunities that became CCM Enrollment Core</li>
+        <li>Applied compliance requirements firsthand — directly shaped VCAP coaching logic</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-dates">2019 — 2025</div>
+      <div class="tl-role">Regional Director of Sales</div>
+      <div class="tl-company">Trusted Medical Group</div>
+      <div class="tl-desc">Built proprietary enrollment platform and logistics infrastructure. In 2022, led a team of 6 people to 1,837 fully compliant Medicare enrollments in under one year — zero AI, zero compliance failures.</div>
+      <ul class="tl-bullets">
+        <li>Built platform and relationships generating <strong>$1M+ revenue in first 6 months</strong></li>
+        <li><strong>1,837 compliant enrollments</strong> with 6 people, zero AI, zero CMS violations</li>
+        <li>FMO relationships and carrier contracts across Medicare Advantage and Supplement lines</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-dates">2016 — 2019</div>
+      <div class="tl-role">Medicare Sales &amp; FMO Development</div>
+      <div class="tl-company">Trusted Medical Group</div>
+      <div class="tl-desc">Built FMO relationships, carrier contracts, and agent infrastructure across Medicare Advantage and Supplement lines — the foundation that enabled every result that followed.</div>
     </div>
   </div>
+</div>
 
-  <!-- 4 Feature Cards -->
-  <div class="feature-strip">
-    <div class="feature-cards">
-      <div class="fc" onclick="location.href='solutions.html'">
-        <div class="fc-icon">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="20" r="10" stroke="#38bdf8" stroke-width="2"/>
-            <path d="M20 42c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
-            <path d="M12 28c0-3.314 2.686-6 6-6" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M52 28c0-3.314-2.686-6-6-6" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="32" cy="20" r="4" fill="#38bdf8" opacity="0.4"/>
-            <line x1="26" y1="14" x2="22" y2="10" stroke="#38bdf8" stroke-width="1.5"/>
-            <line x1="38" y1="14" x2="42" y2="10" stroke="#38bdf8" stroke-width="1.5"/>
-            <line x1="32" y1="10" x2="32" y2="6" stroke="#38bdf8" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="fc-title">AI-Powered Intelligence</div>
-        <div class="fc-desc">Advanced AI analyzes data from multiple sources to deliver actionable insights in real time.</div>
+<!-- STACK -->
+
+<div class="section-wrap" id="stack" style="padding-top:0">
+  <div class="sec-label">Tech Stack</div>
+  <div class="sec-title">What I Work With</div>
+  <div class="sec-desc" style="margin-bottom:32px">The tools and platforms I use to design, build, and deploy AI systems in production environments.</div>
+  <div class="stack-groups">
+    <div class="stack-group">
+      <h4>AI / LLMs</h4>
+      <div class="stack-pills">
+        <span class="pill">Claude API</span><span class="pill">OpenAI API</span><span class="pill">GPT-4o</span><span class="pill">Claude Sonnet</span><span class="pill">Prompt Engineering</span><span class="pill">MCP Servers</span><span class="pill">Tool-Calling</span><span class="pill">RAG</span>
       </div>
-      <div class="fc" onclick="location.href='platform.html'">
-        <div class="fc-icon">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="20" stroke="#38bdf8" stroke-width="2"/>
-            <circle cx="32" cy="32" r="13" stroke="#60a5fa" stroke-width="1.5"/>
-            <circle cx="32" cy="32" r="6" stroke="#3b82f6" stroke-width="1.5"/>
-            <circle cx="32" cy="32" r="2" fill="#38bdf8"/>
-            <line x1="32" y1="12" x2="32" y2="20" stroke="#38bdf8" stroke-width="2"/>
-            <line x1="44" y1="20" x2="38" y2="26" stroke="#60a5fa" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="fc-title">Real-Time Awareness</div>
-        <div class="fc-desc">Live monitoring and predictive analytics keep you ahead of every incident.</div>
+    </div>
+    <div class="stack-group">
+      <h4>Automation</h4>
+      <div class="stack-pills">
+        <span class="pill">n8n</span><span class="pill">Make (Integromat)</span><span class="pill">Zapier</span><span class="pill">Webhooks</span><span class="pill">REST APIs</span><span class="pill">Google Apps Script</span>
       </div>
-      <div class="fc" onclick="location.href='platform.html'">
-        <div class="fc-icon">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M32 8 L54 16 L54 34 C54 46 43 54 32 58 C21 54 10 46 10 34 L10 16 Z" stroke="#38bdf8" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M22 32 L28 38 L42 26" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M32 8 L54 16 L54 34 C54 46 43 54 32 58 C21 54 10 46 10 34 L10 16 Z" fill="rgba(56,189,248,0.05)"/>
-          </svg>
-        </div>
-        <div class="fc-title">Rapid Response</div>
-        <div class="fc-desc">Automated workflows and smart recommendations enable faster, smarter decisions.</div>
+    </div>
+    <div class="stack-group">
+      <h4>Platforms & Integrations</h4>
+      <div class="stack-pills">
+        <span class="pill">Slack API</span><span class="pill">Google APIs</span><span class="pill">Chrome Extensions</span><span class="pill">HubSpot</span><span class="pill">DocuSign</span><span class="pill">Twilio</span>
       </div>
-      <div class="fc" onclick="location.href='about.html'">
-        <div class="fc-icon">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="22" cy="22" r="8" stroke="#38bdf8" stroke-width="2"/>
-            <circle cx="42" cy="22" r="8" stroke="#60a5fa" stroke-width="2"/>
-            <path d="M10 46c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
-            <path d="M30 46c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="fc-title">Unified Command</div>
-        <div class="fc-desc">One platform. One view. Total coordination across teams and agencies.</div>
+    </div>
+    <div class="stack-group">
+      <h4>Build & Deploy</h4>
+      <div class="stack-pills">
+        <span class="pill">HTML / CSS / JS</span><span class="pill">Node.js</span><span class="pill">Python</span><span class="pill">GitHub</span><span class="pill">Netlify</span><span class="pill">SQLite</span>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- PROJECTS -->
+
+<div class="section-wrap" id="projects" style="padding-top:0">
+  <div class="sec-label">Built &amp; Shipped</div>
+  <div class="sec-title">Projects</div>
+  <div class="sec-desc" style="margin-bottom:32px">A track record of building real products — not prototypes.</div>
+  <div class="projects-grid">
+    <div class="proj-card featured">
+      <div>
+        <div class="proj-header">
+          <div class="proj-name">CCM Platform — Enrollment Core + VCAP</div>
+          <span class="proj-badge badge-live">Live</span>
+        </div>
+        <div class="proj-role">Founder &amp; Architect · Complete Care Marketing Inc.</div>
+        <div class="proj-desc">3-tier AI operations platform for regulated Medicare telesales. Workflow automation, AI-powered compliance review, real-time agent coaching, Chrome tooling, Slack webhooks, and document pipelines — built solo from the ground up.</div>
+        <div class="proj-tags">
+          <span class="tag-pill">Claude API</span><span class="tag-pill">OpenAI</span><span class="tag-pill t">n8n</span><span class="tag-pill t">Chrome Ext.</span><span class="tag-pill a">Medicare CMS</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:12px">Key Outcomes</div>
+        <ul class="proj-bullets">
+          <li>Consolidated <strong>11 platforms into 1 screen</strong> — zero tab-switching on calls</li>
+          <li>Reduced agent training time by <strong>60–75%</strong></li>
+          <li>Structurally enforces CMS compliance — <strong>zero non-compliant enrollments</strong></li>
+          <li>4 VCA coach personas — agents pick and name their own AI coach</li>
+          <li><strong>$1M+ revenue</strong> in first 6 months with 6-person team</li>
+        </ul>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-name">Six Pack Stacked Body</div>
+        <span class="proj-badge badge-pub">Publishing</span>
+      </div>
+      <div class="proj-role">Author · Fitness E-Book + App Bundle</div>
+      <div class="proj-desc">Fitness e-book and companion workout tracking app — sold as a Gumroad bundle. App includes workout logging, body stats, progress photos with before/after comparison, and weight chart.</div>
+      <div class="proj-tags" style="margin-top:12px">
+        <span class="tag-pill t">Gumroad</span><span class="tag-pill">HTML App</span><span class="tag-pill a">LocalStorage</span>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-name">SNG Technical E-Books</div>
+        <span class="proj-badge badge-pub">Publishing</span>
+      </div>
+      <div class="proj-role">Author · AI-Assisted Technical Writing · SNG Cycles</div>
+      <div class="proj-desc">Build guides for electric powersports enthusiasts — written with AI as co-author. Covers complete vehicle builds from frame selection through final tune.</div>
+      <div class="proj-tags" style="margin-top:12px">
+        <span class="tag-pill t">LBX Frame-Up</span><span class="tag-pill t">270-E Light Bee</span><span class="tag-pill a">CRF450 52kW</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accent-bar"></div>
+
+<!-- EMAIL TEMPLATE -->
 <!-- FOOTER -->
 <footer>
   <div style="display:flex;align-items:center;gap:12px">
@@ -458,87 +487,6 @@ function checkPortal(target){const v=document.getElementById('portal-pass').valu
 document.getElementById('portal-overlay').addEventListener('click',function(e){if(e.target===this)closePortal()});
 function copyTemplate(btn){const text=document.getElementById('email-template').innerText;const done=()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Email';btn.classList.remove('copied')},2500)};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));}else{fallbackCopy(text,done);}}
 function fallbackCopy(text,done){const t=document.createElement('textarea');t.value=text;t.setAttribute('readonly','');t.style.position='fixed';t.style.left='-9999px';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);done();}
-async function submitDemoRequest(e){
-  e.preventDefault();
-  const form=e.target;
-  const status=document.getElementById('landing-form-status');
-  const button=form.querySelector('button');
-  const body=Object.fromEntries(new FormData(form).entries());
-  button.disabled=true;button.textContent='Submitting...';status.style.color='var(--teal)';status.textContent='';
-  try{
-    const res=await fetch('/api/demo-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(!res.ok) throw new Error('request failed');
-    form.reset();
-    status.textContent='Request received. I will follow up directly.';
-  }catch(err){
-    status.style.color='#f87171';
-    status.textContent='Could not submit. Email sharknotgoldfish@gmail.com directly.';
-  }finally{
-    button.disabled=false;button.textContent='Submit';
-  }
-}
-</script>
-<script>
-/* ── HERO CANVAS ANIMATION ── */
-(function(){
-  const canvas = document.getElementById('hero-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, nodes = [];
-  const COLORS = ['rgba(59,130,246,', 'rgba(56,189,248,', 'rgba(96,165,250,'];
-
-  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;init()}
-  window.addEventListener('resize', resize);
-
-  function init(){
-    nodes=[];
-    const count = Math.floor((W*H)/14000);
-    for(let i=0;i<count;i++){
-      nodes.push({
-        x:Math.random()*W, y:Math.random()*H,
-        vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3,
-        r:Math.random()*2+1,
-        c:COLORS[Math.floor(Math.random()*COLORS.length)],
-        o:Math.random()*0.5+0.2
-      });
-    }
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    // Globe glow blobs
-    const g1=ctx.createRadialGradient(W*0.25,H*0.5,0,W*0.25,H*0.5,W*0.35);
-    g1.addColorStop(0,'rgba(30,58,138,0.18)');g1.addColorStop(1,'transparent');
-    ctx.fillStyle=g1;ctx.fillRect(0,0,W,H);
-    const g2=ctx.createRadialGradient(W*0.75,H*0.5,0,W*0.75,H*0.5,W*0.3);
-    g2.addColorStop(0,'rgba(23,37,90,0.12)');g2.addColorStop(1,'transparent');
-    ctx.fillStyle=g2;ctx.fillRect(0,0,W,H);
-
-    // Connections
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<150){
-          const alpha=(1-dist/150)*0.25;
-          ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);
-          ctx.strokeStyle=`rgba(59,130,246,${alpha})`;ctx.lineWidth=0.8;ctx.stroke();
-        }
-      }
-    }
-    // Dots
-    nodes.forEach(n=>{
-      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle=n.c+n.o+')';ctx.fill();
-      n.x+=n.vx;n.y+=n.vy;
-      if(n.x<0||n.x>W)n.vx*=-1;
-      if(n.y<0||n.y>H)n.vy*=-1;
-    });
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  draw();
-})();
 </script>
 </body>
 </html>

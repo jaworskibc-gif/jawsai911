@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCM — Medicare Telesales CRM</title>
+  <style>
+    :root {
+      --bg: #0b0f1e; --surface: #1a1d27; --surface2: #232636; --border: #2e3347;
+      --blue: #3b82f6; --blue-dim: #1d4ed8; --green: #22c55e; --yellow: #f59e0b;
+      --red: #ef4444; --orange: #FF6B1A; --text: #e2e8f0; --muted: #94a3b8; --dim: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    .nav { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .nav-brand { font-weight: 700; font-size: 1rem; color: var(--orange); margin-right: 16px; }
+    .nav-brand span { color: var(--muted); font-weight: 400; }
+    .nav-tab { padding: 6px 14px; border-radius: 6px; border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: .85rem; transition: all .15s; }
+    .nav-tab.active, .nav-tab:hover { background: var(--surface2); color: var(--text); }
+    .nav-tab.active { color: var(--blue); }
+    .spacer { flex: 1; }
+    .stat-pill { padding: 4px 10px; border-radius: 20px; font-size: .78rem; background: var(--surface2); color: var(--muted); }
+    .stat-pill span { color: var(--text); font-weight: 600; }
+    .nav-link { font-size: .78rem; color: var(--dim); text-decoration: none; padding: 4px 8px; border-radius: 4px; }
+    .nav-link:hover { color: var(--muted); }
+    .page { display: none; flex: 1; padding: 20px; }
+    .page.active { display: flex; flex-direction: column; gap: 16px; }
+    .stats-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; min-width: 130px; flex: 1; }
+    .stat-card .label { font-size: .75rem; color: var(--muted); margin-bottom: 4px; }
+    .stat-card .value { font-size: 1.6rem; font-weight: 700; }
+    .stat-card .value.blue { color: var(--blue); } .stat-card .value.green { color: var(--green); }
+    .stat-card .value.yellow { color: var(--yellow); } .stat-card .value.orange { color: var(--orange); }
+    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    input[type=text], input[type=email], input[type=tel], input[type=url], input[type=date], input[type=number], select, textarea {
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 7px 11px; font-size: .85rem; outline: none; font-family: inherit;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--blue); }
+    .search-input { width: 240px; }
+    select { cursor: pointer; }
+    .btn { padding: 7px 14px; border-radius: 6px; border: none; cursor: pointer; font-size: .85rem; font-weight: 500; transition: all .15s; }
+    .btn-primary { background: var(--blue); color: #fff; } .btn-primary:hover { background: var(--blue-dim); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); } .btn-ghost:hover { background: var(--surface2); color: var(--text); }
+    .btn-sm { padding: 4px 10px; font-size: .78rem; }
+    .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .84rem; }
+    th { padding: 10px 14px; text-align: left; color: var(--muted); font-weight: 600; font-size: .75rem; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface2); }
+    .link-cell { color: var(--blue); cursor: pointer; font-weight: 500; }
+    .link-cell:hover { text-decoration: underline; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
+    .badge-new { background: #1e3a5f; color: #60a5fa; } .badge-contacted { background: #1c3a2e; color: #4ade80; }
+    .badge-meeting { background: #3b2a10; color: #fbbf24; } .badge-proposal { background: #3b1d28; color: #f472b6; }
+    .badge-closed { background: #1a2e1a; color: #86efac; } .badge-lost { background: #2e1a1a; color: #fca5a5; }
+    .badge-high { background: #3b1a1a; color: #f97316; } .badge-medium { background: #1c2a3b; color: #60a5fa; } .badge-low { background: #1c2e1c; color: #86efac; }
+    .pagination { display: flex; gap: 8px; align-items: center; justify-content: flex-end; font-size: .82rem; color: var(--muted); }
+    .detail-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 100; }
+    .detail-overlay.open { display: flex; align-items: flex-start; justify-content: flex-end; }
+    .detail-panel { width: 520px; height: 100vh; background: var(--surface); border-left: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; }
+    .detail-header { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .detail-header h2 { font-size: 1rem; flex: 1; }
+    .detail-body { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+    .detail-section h3 { font-size: .78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: .72rem; color: var(--dim); }
+    .field input, .field select, .field textarea { width: 100%; }
+    .field textarea { resize: vertical; min-height: 70px; }
+    .field-full { grid-column: 1 / -1; }
+    .contact-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+    .contact-card .info { flex: 1; }
+    .contact-card .name { font-weight: 600; font-size: .88rem; }
+    .contact-card .meta { font-size: .78rem; color: var(--muted); margin-top: 2px; }
+    .activity-item { border-left: 3px solid var(--border); padding: 8px 12px; margin-bottom: 8px; background: var(--surface2); border-radius: 0 6px 6px 0; }
+    .activity-item .act-type { font-size: .72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+    .activity-item .act-subject { font-size: .88rem; font-weight: 500; margin: 2px 0; }
+    .activity-item .act-meta { font-size: .75rem; color: var(--dim); }
+    .activity-item.done { opacity: .5; }
+    .tag-call { border-color: var(--blue); } .tag-email { border-color: var(--green); }
+    .tag-meeting { border-color: var(--yellow); } .tag-note { border-color: var(--dim); }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 200; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; width: 480px; max-height: 90vh; overflow-y: auto; }
+    .modal-header { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .modal-header h2 { font-size: 1rem; flex: 1; }
+    .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .modal-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; }
+    .upcoming-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; display: flex; gap: 14px; align-items: flex-start; }
+    .upcoming-card .date-badge { background: var(--surface2); border-radius: 8px; padding: 8px; text-align: center; min-width: 46px; }
+    .upcoming-card .date-badge .day { font-size: 1.3rem; font-weight: 700; line-height: 1; }
+    .upcoming-card .date-badge .mon { font-size: .7rem; color: var(--muted); text-transform: uppercase; }
+    .upcoming-card .info h4 { font-size: .9rem; font-weight: 600; }
+    .upcoming-card .info .sub { font-size: .8rem; color: var(--muted); margin-top: 2px; }
+    .upcoming-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+    #csv-textarea { width: 100%; height: 120px; font-family: monospace; font-size: .8rem; }
+    .empty { text-align: center; padding: 40px; color: var(--dim); font-size: .9rem; }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand">CCM <span>/ CRM</span></div>
+  <button class="nav-tab active" onclick="showPage('leads', this)">Leads</button>
+  <button class="nav-tab" onclick="showPage('upcoming', this)">Follow-ups</button>
+  <button class="nav-tab" onclick="showPage('contacts-page', this)">Contacts</button>
+  <div class="spacer"></div>
+  <div class="stat-pill" id="nav-stats">Loading...</div>
+  <a href="/" class="nav-link">← Site</a>
+  <a href="/crm/logout" class="nav-link">Logout</a>
+</nav>
+
+<div class="page active" id="page-leads">
+  <div class="stats-row" id="stats-row"></div>
+  <div class="toolbar">
+    <input type="text" class="search-input" placeholder="Search companies..." id="search-input" oninput="debounceSearch()">
+    <select id="filter-status" onchange="loadLeads()">
+      <option value="">All Statuses</option>
+      <option value="new">New</option><option value="contacted">Contacted</option>
+      <option value="meeting">Meeting</option><option value="proposal">Proposal</option>
+      <option value="closed">Closed Won</option><option value="lost">Lost</option>
+    </select>
+    <select id="filter-priority" onchange="loadLeads()">
+      <option value="">All Priorities</option>
+      <option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option>
+    </select>
+    <select id="filter-state" onchange="loadLeads()"><option value="">All States</option></select>
+    <div class="spacer"></div>
+    <button class="btn btn-ghost btn-sm" onclick="openImportModal()">Import CSV</button>
+    <button class="btn btn-primary" onclick="openAddCompany()">+ Add Company</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Company</th><th>HQ</th><th>Agents</th><th>Type</th><th>Status</th><th>Priority</th><th>Contacts</th><th>Last Activity</th><th></th></tr></thead>
+      <tbody id="leads-tbody"></tbody>
+    </table>
+  </div>
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<div class="page" id="page-upcoming">
+  <h2 style="font-size:1rem;color:var(--muted)">Upcoming Follow-ups</h2>
+  <div class="upcoming-grid" id="upcoming-grid"></div>
+</div>
+
+<div class="page" id="page-contacts-page">
+  <div class="toolbar"><h2 style="font-size:1rem">All Contacts</h2><div class="spacer"></div></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Email</th><th>Phone</th></tr></thead>
+      <tbody id="contacts-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Detail Panel -->
+<div class="detail-overlay" id="detail-overlay" onclick="closeDetail(event)">
+  <div class="detail-panel" id="detail-panel">
+    <div class="detail-header">
+      <h2 id="detail-title">Company</h2>
+      <button class="btn btn-ghost btn-sm" onclick="saveCompanyDetail()">Save</button>
+      <button class="btn btn-ghost btn-sm" onclick="closeDetailPanel()">✕</button>
+    </div>
+    <div class="detail-body" id="detail-body"></div>
+  </div>
+</div>
+
+<!-- Add Company Modal -->
+<div class="modal-overlay" id="company-modal">
+  <div class="modal">
+    <div class="modal-header"><h2 id="company-modal-title">Add Company</h2><button class="btn btn-ghost btn-sm" onclick="closeModal('company-modal')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="cm-id">
+      <div class="field-grid">
+        <div class="field field-full"><label>Company Name *</label><input type="text" id="cm-name"></div>
+        <div class="field"><label>HQ City</label><input type="text" id="cm-city"></div>
+        <div class="field"><label>HQ State</label><input type="text" id="cm-state" maxlength="2" placeholder="TX"></div>
+        <div class="field"><label>Agent Count (Min)</label><input type="number" id="cm-min"></div>
+        <div class="field"><label>Agent Count (Max)</label><input type="number" id="cm-max"></div>
+        <div class="field field-full"><label>Website</label><input type="url" id="cm-website" placeholder="https://..."></div>
+        <div class="field"><label>Phone</label><input type="tel" id="cm-phone"></div>
+        <div class="field"><label>Email</label><input type="email" id="cm-email"></div>
+        <div class="field"><label>Type</label>
+          <select id="cm-type"><option>FMO</option><option>IMO</option><option>Public FMO/Agency</option><option>IMO/FMO</option><option>Independent Agency</option><option>Captive Agency</option><option>Tech-Enabled Agency</option><option>Online Marketplace</option><option>FMO/Holding Company</option><option>Carrier/Captive Agency</option><option>Other</option></select>
+        </div>
+        <div class="field"><label>Status</label>
+          <select id="cm-status"><option value="new">New</option><option value="contacted">Contacted</option><option value="meeting">Meeting</option><option value="proposal">Proposal</option><option value="closed">Closed Won</option><option value="lost">Lost</option></select>
+        </div>
+        <div class="field"><label>Priority</label>
+          <select id="cm-priority"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select>
+        </div>
+        <div class="field field-full"><label>Notes</label><textarea id="cm-notes"></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('company-modal')">Cancel</button><button class="btn btn-primary" onclick="saveCompanyModal()">Save</button></div>
+  </div>
+</div>
+
+<!-- Add Contact Modal -->
+<div class="modal-overlay" id="contact-modal">
+  <div class="modal">
+    <div class="modal-header"><h2>Add Contact</h2><button class="btn btn-ghost btn-sm" onclick="closeModal('contact-modal')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="ctm-company-id"><input type="hidden" id="ctm-id">
+      <div class="field-grid">
+        <div class="field"><label>First Name</label><input type="text" id="ctm-first"></div>
+        <div class="field"><label>Last Name</label><input type="text" id="ctm-last"></div>
+        <div class="field field-full"><label>Title</label><input type="text" id="ctm-title" placeholder="VP of Sales..."></div>
+        <div class="field"><label>Email</label><input type="email" id="ctm-email"></div>
+        <div class="field"><label>Phone</label><input type="tel" id="ctm-phone"></div>
+        <div class="field field-full"><label>LinkedIn URL</label><input type="url" id="ctm-linkedin"></div>
+        <div class="field field-full"><label>Notes</label><textarea id="ctm-notes"></textarea></div>
+        <div class="field"><label><input type="checkbox" id="ctm-primary"> Primary Contact</label></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('contact-modal')">Cancel</button><button class="btn btn-primary" onclick="saveContact()">Save Contact</button></div>
+  </div>
+</div>
+
+<!-- Log Activity Modal -->
+<div class="modal-overlay" id="activity-modal">
+  <div class="modal">
+    <div class="modal-header"><h2>Log Activity</h2><button class="btn btn-ghost btn-sm" onclick="closeModal('activity-modal')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="am-company-id">
+      <div class="field-grid">
+        <div class="field"><label>Type</label>
+          <select id="am-type"><option value="call">Call</option><option value="email">Email</option><option value="meeting">Meeting</option><option value="note">Note</option><option value="linkedin">LinkedIn</option></select>
+        </div>
+        <div class="field"><label>Outcome</label>
+          <select id="am-outcome"><option value="">--</option><option value="reached">Reached</option><option value="voicemail">Voicemail</option><option value="no_answer">No Answer</option><option value="interested">Interested</option><option value="not_interested">Not Interested</option><option value="callback">Callback Requested</option></select>
+        </div>
+        <div class="field field-full"><label>Subject</label><input type="text" id="am-subject"></div>
+        <div class="field field-full"><label>Notes</label><textarea id="am-notes"></textarea></div>
+        <div class="field"><label>Follow-up Date</label><input type="date" id="am-followup"></div>
+        <div class="field"><label><input type="checkbox" id="am-done"> Mark Complete</label></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('activity-modal')">Cancel</button><button class="btn btn-primary" onclick="saveActivity()">Log Activity</button></div>
+  </div>
+</div>
+
+<!-- Import Modal -->
+<div class="modal-overlay" id="import-modal">
+  <div class="modal">
+    <div class="modal-header"><h2>Import CSV</h2><button class="btn btn-ghost btn-sm" onclick="closeModal('import-modal')">✕</button></div>
+    <div class="modal-body">
+      <p style="font-size:.82rem;color:var(--muted);line-height:1.6">Paste CSV rows. Columns (in order):<br>
+      <code style="font-size:.78rem;color:var(--blue)">name, state, city, agent_min, agent_max, website, phone, type, priority, notes</code></p>
+      <textarea id="csv-textarea" placeholder="GoHealth,IL,Chicago,3000,5000,gohealth.com,800-979-0109,FMO/Agency,high,"></textarea>
+    </div>
+    <div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('import-modal')">Cancel</button><button class="btn btn-primary" onclick="importCSV()">Import</button></div>
+  </div>
+</div>
+
+<script>
+const API = '/crm/api';
+let currentPage = 1, currentCompanyId = null, searchTimer = null;
+
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'leads') loadLeads();
+  if (name === 'upcoming') loadUpcoming();
+  if (name === 'contacts-page') loadAllContacts();
+}
+
+async function loadStats() {
+  const s = await fetch(`${API}/stats`).then(r => r.json());
+  const byStatus = Object.fromEntries(s.by_status.map(x => [x.status, x.n]));
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card"><div class="label">Total Companies</div><div class="value blue">${s.total_companies}</div></div>
+    <div class="stat-card"><div class="label">New Leads</div><div class="value">${byStatus.new||0}</div></div>
+    <div class="stat-card"><div class="label">Contacted</div><div class="value yellow">${byStatus.contacted||0}</div></div>
+    <div class="stat-card"><div class="label">In Pipeline</div><div class="value orange">${(byStatus.meeting||0)+(byStatus.proposal||0)}</div></div>
+    <div class="stat-card"><div class="label">Open Tasks</div><div class="value">${s.open_activities}</div></div>
+    <div class="stat-card"><div class="label">Due This Week</div><div class="value ${s.upcoming_followups>0?'orange':'green'}">${s.upcoming_followups}</div></div>`;
+  document.getElementById('nav-stats').innerHTML = `<span>${s.total_companies}</span> companies &nbsp;·&nbsp; <span>${s.upcoming_followups}</span> due`;
+}
+
+function debounceSearch() { clearTimeout(searchTimer); searchTimer = setTimeout(() => { currentPage=1; loadLeads(); }, 300); }
+
+async function loadLeads() {
+  const search = document.getElementById('search-input').value;
+  const status = document.getElementById('filter-status').value;
+  const priority = document.getElementById('filter-priority').value;
+  const state = document.getElementById('filter-state').value;
+  const params = new URLSearchParams({ page: currentPage, limit: 50 });
+  if (search) params.set('search', search);
+  if (status) params.set('status', status);
+  if (priority) params.set('priority', priority);
+  if (state) params.set('state', state);
+  const data = await fetch(`${API}/companies?${params}`).then(r => r.json());
+  renderLeads(data); renderPagination(data); loadStats(); populateStateFilter(data);
+}
+
+function renderLeads(data) {
+  const tbody = document.getElementById('leads-tbody');
+  if (!data.data.length) { tbody.innerHTML = '<tr><td colspan="9" class="empty">No companies found</td></tr>'; return; }
+  tbody.innerHTML = data.data.map(c => `<tr>
+    <td class="link-cell" onclick="openDetail(${c.id})">${c.name}</td>
+    <td>${c.hq_city?c.hq_city+', ':''}${c.hq_state||'—'}</td>
+    <td>${c.agent_count_min&&c.agent_count_max?c.agent_count_min.toLocaleString()+'–'+c.agent_count_max.toLocaleString():c.agent_count_min?c.agent_count_min.toLocaleString()+'+':'—'}</td>
+    <td style="color:var(--muted);font-size:.78rem">${c.type||'—'}</td>
+    <td><span class="badge badge-${c.status}">${c.status}</span></td>
+    <td><span class="badge badge-${c.priority}">${c.priority}</span></td>
+    <td style="color:var(--muted)">${c.contact_count||0}</td>
+    <td style="color:var(--dim);font-size:.78rem">${c.last_activity?new Date(c.last_activity).toLocaleDateString():'—'}</td>
+    <td>
+      <button class="btn btn-ghost btn-sm" onclick="openLogActivity(${c.id})">+ Log</button>
+      <button class="btn btn-ghost btn-sm" onclick="deleteCompany(${c.id},'${c.name.replace(/'/g,"\\'")}')">✕</button>
+    </td></tr>`).join('');
+}
+
+function renderPagination(data) {
+  const pages = Math.ceil(data.total / data.limit);
+  if (pages <= 1) { document.getElementById('pagination').innerHTML = `<span>${data.total} companies</span>`; return; }
+  let html = `<span>${data.total} companies</span> &nbsp;`;
+  if (currentPage > 1) html += `<button class="btn btn-ghost btn-sm" onclick="gotoPage(${currentPage-1})">‹ Prev</button>`;
+  html += `<span>Page ${currentPage} of ${pages}</span>`;
+  if (currentPage < pages) html += `<button class="btn btn-ghost btn-sm" onclick="gotoPage(${currentPage+1})">Next ›</button>`;
+  document.getElementById('pagination').innerHTML = html;
+}
+
+function gotoPage(p) { currentPage = p; loadLeads(); }
+
+let statesPopulated = false;
+function populateStateFilter(data) {
+  if (statesPopulated) return;
+  const sel = document.getElementById('filter-state');
+  [...new Set(data.data.map(c => c.hq_state).filter(Boolean))].sort().forEach(s => {
+    const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o);
+  });
+  statesPopulated = true;
+}
+
+async function openDetail(id) {
+  currentCompanyId = id;
+  const c = await fetch(`${API}/companies/${id}`).then(r => r.json());
+  document.getElementById('detail-title').textContent = c.name;
+  document.getElementById('detail-overlay').classList.add('open');
+  renderDetailBody(c);
+}
+
+function renderDetailBody(c) {
+  const statusOpts = ['new','contacted','meeting','proposal','closed','lost'].map(s => `<option value="${s}" ${c.status===s?'selected':''}>${s}</option>`).join('');
+  const priorityOpts = ['high','medium','low'].map(p => `<option value="${p}" ${c.priority===p?'selected':''}>${p}</option>`).join('');
+  document.getElementById('detail-body').innerHTML = `
+    <div class="detail-section">
+      <h3>Company Info</h3>
+      <div class="field-grid">
+        <div class="field field-full"><label>Name</label><input type="text" id="d-name" value="${esc(c.name)}"></div>
+        <div class="field"><label>City</label><input type="text" id="d-city" value="${esc(c.hq_city||'')}"></div>
+        <div class="field"><label>State</label><input type="text" id="d-state" value="${esc(c.hq_state||'')}" maxlength="2"></div>
+        <div class="field"><label>Agents Min</label><input type="number" id="d-min" value="${c.agent_count_min||''}"></div>
+        <div class="field"><label>Agents Max</label><input type="number" id="d-max" value="${c.agent_count_max||''}"></div>
+        <div class="field field-full"><label>Website</label><input type="url" id="d-website" value="${esc(c.website||'')}"></div>
+        <div class="field"><label>Phone</label><input type="tel" id="d-phone" value="${esc(c.phone||'')}"></div>
+        <div class="field"><label>Email</label><input type="email" id="d-email" value="${esc(c.email||'')}"></div>
+        <div class="field"><label>Status</label><select id="d-status">${statusOpts}</select></div>
+        <div class="field"><label>Priority</label><select id="d-priority">${priorityOpts}</select></div>
+        <div class="field field-full"><label>Notes</label><textarea id="d-notes">${esc(c.notes||'')}</textarea></div>
+      </div>
+    </div>
+    <div class="detail-section">
+      <h3>Contacts <button class="btn btn-ghost btn-sm" style="margin-left:8px" onclick="openAddContact(${c.id})">+ Add</button></h3>
+      <div id="contact-list">${c.contacts.length ? c.contacts.map(ct => `
+        <div class="contact-card"><div class="info">
+          <div class="name">${esc(ct.first_name||'')} ${esc(ct.last_name||'')}${ct.is_primary?' <span style="color:var(--blue);font-size:.7rem">PRIMARY</span>':''}</div>
+          <div class="meta">${ct.title||''}</div>
+          <div class="meta">${ct.email?'✉ '+ct.email:''} ${ct.phone?'· 📞 '+ct.phone:''}</div>
+        </div><button class="btn btn-ghost btn-sm" onclick="deleteContact(${ct.id},${c.id})">✕</button></div>`).join('')
+        : '<div class="empty" style="padding:16px">No contacts yet</div>'}</div>
+    </div>
+    <div class="detail-section">
+      <h3>Activity <button class="btn btn-ghost btn-sm" style="margin-left:8px" onclick="openLogActivity(${c.id})">+ Log</button></h3>
+      <div id="activity-list">${c.activities.length ? c.activities.map(a => `
+        <div class="activity-item tag-${a.type} ${a.completed?'done':''}">
+          <div class="act-type">${a.type}${a.outcome?' · '+a.outcome:''} ${a.completed?'· ✓':''}</div>
+          <div class="act-subject">${esc(a.subject||'')}</div>
+          <div class="act-meta">${a.notes?esc(a.notes.substring(0,120)):''}${a.follow_up_date?' · Follow-up: '+a.follow_up_date:''}</div>
+          ${!a.completed?`<button class="btn btn-ghost btn-sm" style="margin-top:4px" onclick="completeActivity(${a.id},${c.id})">Mark Done</button>`:''}
+        </div>`).join('') : '<div class="empty" style="padding:16px">No activity logged</div>'}</div>
+    </div>`;
+}
+
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+async function saveCompanyDetail() {
+  const body = { name:document.getElementById('d-name').value, hq_city:document.getElementById('d-city').value, hq_state:document.getElementById('d-state').value, agent_count_min:document.getElementById('d-min').value||null, agent_count_max:document.getElementById('d-max').value||null, website:document.getElementById('d-website').value, phone:document.getElementById('d-phone').value, email:document.getElementById('d-email').value, status:document.getElementById('d-status').value, priority:document.getElementById('d-priority').value, notes:document.getElementById('d-notes').value, type:'' };
+  await fetch(`${API}/companies/${currentCompanyId}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+  loadLeads();
+  document.getElementById('detail-title').textContent = body.name;
+}
+
+function closeDetail(e) { if (e.target === document.getElementById('detail-overlay')) closeDetailPanel(); }
+function closeDetailPanel() { document.getElementById('detail-overlay').classList.remove('open'); currentCompanyId = null; }
+
+function openAddCompany() {
+  ['cm-id','cm-name','cm-city','cm-state','cm-min','cm-max','cm-website','cm-phone','cm-email','cm-notes'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('cm-status').value = 'new'; document.getElementById('cm-priority').value = 'medium';
+  document.getElementById('company-modal-title').textContent = 'Add Company';
+  document.getElementById('company-modal').classList.add('open');
+}
+
+async function saveCompanyModal() {
+  const body = { name:document.getElementById('cm-name').value, hq_city:document.getElementById('cm-city').value, hq_state:document.getElementById('cm-state').value, agent_count_min:document.getElementById('cm-min').value||null, agent_count_max:document.getElementById('cm-max').value||null, website:document.getElementById('cm-website').value, phone:document.getElementById('cm-phone').value, email:document.getElementById('cm-email').value, type:document.getElementById('cm-type').value, status:document.getElementById('cm-status').value, priority:document.getElementById('cm-priority').value, notes:document.getElementById('cm-notes').value };
+  if (!body.name) return alert('Company name is required');
+  const id = document.getElementById('cm-id').value;
+  await fetch(id ? `${API}/companies/${id}` : `${API}/companies`, { method:id?'PUT':'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+  closeModal('company-modal'); loadLeads();
+}
+
+function openAddContact(companyId) {
+  document.getElementById('ctm-company-id').value = companyId; document.getElementById('ctm-id').value = '';
+  ['ctm-first','ctm-last','ctm-title','ctm-email','ctm-phone','ctm-linkedin','ctm-notes'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('ctm-primary').checked = false;
+  document.getElementById('contact-modal').classList.add('open');
+}
+
+async function saveContact() {
+  const body = { company_id:document.getElementById('ctm-company-id').value, first_name:document.getElementById('ctm-first').value, last_name:document.getElementById('ctm-last').value, title:document.getElementById('ctm-title').value, email:document.getElementById('ctm-email').value, phone:document.getElementById('ctm-phone').value, linkedin:document.getElementById('ctm-linkedin').value, notes:document.getElementById('ctm-notes').value, is_primary:document.getElementById('ctm-primary').checked };
+  await fetch(`${API}/contacts`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+  closeModal('contact-modal');
+  if (currentCompanyId) openDetail(currentCompanyId);
+}
+
+async function deleteContact(id, companyId) {
+  if (!confirm('Delete this contact?')) return;
+  await fetch(`${API}/contacts/${id}`, { method:'DELETE' });
+  openDetail(companyId);
+}
+
+async function loadAllContacts() {
+  const rows = await fetch(`${API}/contacts`).then(r => r.json());
+  document.getElementById('contacts-tbody').innerHTML = rows.length
+    ? rows.map(c => `<tr><td>${esc(c.first_name||'')} ${esc(c.last_name||'')}</td><td style="color:var(--muted)">${esc(c.title||'')}</td><td class="link-cell" onclick="openDetail(${c.company_id})">${esc(c.company_name||'')}</td><td style="color:var(--muted)">${esc(c.email||'')}</td><td style="color:var(--muted)">${esc(c.phone||'')}</td></tr>`).join('')
+    : '<tr><td colspan="5" class="empty">No contacts yet</td></tr>';
+}
+
+function openLogActivity(companyId) {
+  document.getElementById('am-company-id').value = companyId;
+  ['am-subject','am-notes','am-followup'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('am-type').value = 'call'; document.getElementById('am-outcome').value = ''; document.getElementById('am-done').checked = false;
+  document.getElementById('activity-modal').classList.add('open');
+}
+
+async function saveActivity() {
+  const body = { company_id:document.getElementById('am-company-id').value, type:document.getElementById('am-type').value, subject:document.getElementById('am-subject').value, notes:document.getElementById('am-notes').value, outcome:document.getElementById('am-outcome').value, follow_up_date:document.getElementById('am-followup').value, completed:document.getElementById('am-done').checked };
+  await fetch(`${API}/activities`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+  closeModal('activity-modal');
+  if (currentCompanyId === Number(body.company_id)) openDetail(currentCompanyId);
+  loadLeads();
+}
+
+async function completeActivity(actId, companyId) {
+  const acts = await fetch(`${API}/activities?company_id=${companyId}`).then(r => r.json());
+  const act = acts.find(a => a.id === actId);
+  if (!act) return;
+  await fetch(`${API}/activities/${actId}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({...act, completed:true}) });
+  openDetail(companyId);
+}
+
+async function loadUpcoming() {
+  const rows = await fetch(`${API}/activities?upcoming=1`).then(r => r.json());
+  const grid = document.getElementById('upcoming-grid');
+  if (!rows.length) { grid.innerHTML = '<div class="empty" style="grid-column:1/-1">No upcoming follow-ups</div>'; return; }
+  grid.innerHTML = rows.map(r => {
+    const d = new Date(r.follow_up_date + 'T00:00:00');
+    return `<div class="upcoming-card"><div class="date-badge"><div class="day">${d.getDate()}</div><div class="mon">${d.toLocaleString('default',{month:'short'})}</div></div><div class="info"><h4>${esc(r.company_name)}</h4><div class="sub">${r.type} · ${esc(r.subject||'')}${r.first_name?' · '+r.first_name+' '+r.last_name:''}</div>${r.notes?`<div class="sub" style="margin-top:4px">${esc(r.notes.substring(0,80))}</div>`:''}<button class="btn btn-ghost btn-sm" style="margin-top:6px" onclick="showPage('leads',document.querySelectorAll('.nav-tab')[0]);openDetail(${r.company_id})">View</button></div></div>`;
+  }).join('');
+}
+
+function openImportModal() { document.getElementById('csv-textarea').value = ''; document.getElementById('import-modal').classList.add('open'); }
+
+async function importCSV() {
+  const lines = document.getElementById('csv-textarea').value.trim().split('\n').filter(Boolean);
+  const rows = lines.map(line => {
+    const [name,hq_state,hq_city,agent_count_min,agent_count_max,website,phone,type,priority,notes] = line.split(',').map(s => s.trim());
+    return { name, hq_state, hq_city, agent_count_min:Number(agent_count_min)||null, agent_count_max:Number(agent_count_max)||null, website, phone, type, priority:priority||'medium', notes };
+  }).filter(r => r.name);
+  if (!rows.length) return alert('No valid rows found');
+  const res = await fetch(`${API}/import`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({rows}) });
+  const data = await res.json();
+  alert(`Imported ${data.imported} companies`); closeModal('import-modal'); loadLeads();
+}
+
+async function deleteCompany(id, name) {
+  if (!confirm(`Delete "${name}"?`)) return;
+  await fetch(`${API}/companies/${id}`, { method:'DELETE' }); loadLeads();
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+loadLeads();
+</script>
+</body>
+</html>

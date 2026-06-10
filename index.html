@@ -307,7 +307,7 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo-wrap">
-    <img src="jawsai911-logo2.jpeg" class="nav-logo-img" alt="JAWSAI911">
+    <img src="jawsai911-logo-dark-nav.jpeg" class="nav-logo-img" alt="JAWSAI911">
     <div class="nav-logo-text">
       <div class="nav-logo-name">JAWS<span>AI</span>911</div>
       <div class="nav-logo-sub">AI Incident Command Center</div>
@@ -322,7 +322,7 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <a href="#landing-form" class="nav-cta">Request Demo</a>
+    <a href="contact.html#demo-form" class="nav-cta">Request Demo</a>
   </div>
 </nav>
 <!-- PORTAL MODAL -->
@@ -343,7 +343,7 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
-    <img src="jawsai911-logo2.jpeg" class="hero-logo-img" alt="JAWSAI911.com — Your AI Incident Command Center">
+    <img src="jawsai911-logo-dark-hero.jpeg" class="hero-logo-img" alt="JAWSAI911.com — Your AI Incident Command Center">
     <div class="hero-headline">When Seconds Matter, Intelligence Leads.</div>
     <div class="hero-sub">AI-Powered Situational Awareness. &nbsp;Real-Time Decisions. &nbsp;Better Outcomes.</div>
     <div class="hero-btns">
@@ -351,37 +351,17 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         Explore Platform
       </a>
-      <a href="#landing-form" class="btn-hero-ghost">
+      <a href="contact.html#demo-form" class="btn-hero-ghost">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Request Demo
+        Schedule Demo
       </a>
-    </div>
-    <div class="lead-form-card" id="landing-form">
-      <h2>Request a Demo</h2>
-      <p>Tell me who you are and what you want AI to fix. I will follow up directly.</p>
-      <form class="lead-form" onsubmit="submitDemoRequest(event)">
-        <input name="name" type="text" placeholder="Name *" required>
-        <input name="email" type="email" placeholder="Email *" required>
-        <input name="phone" type="tel" placeholder="Phone">
-        <input name="organization" type="text" placeholder="Company / Agency">
-        <select name="ai_currently" aria-label="Do you currently use AI?">
-          <option value="">Using AI currently?</option>
-          <option value="yes">Yes</option>
-          <option value="some">A little / testing</option>
-          <option value="no">No</option>
-        </select>
-        <textarea class="wide" name="ai_use_case" placeholder="If yes, what are you using AI for?"></textarea>
-        <textarea class="full" name="need" placeholder="What do you need help with?"></textarea>
-        <button type="submit">Submit</button>
-      </form>
-      <div class="form-status" id="landing-form-status"></div>
     </div>
   </div>
 
   <!-- 4 Feature Cards -->
   <div class="feature-strip">
     <div class="feature-cards">
-      <div class="fc" onclick="location.href='solutions.html'">
+      <div class="fc" onclick="location.href='medicare-enrollment.html'">
         <div class="fc-icon">
           <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="32" cy="20" r="10" stroke="#38bdf8" stroke-width="2"/>
@@ -440,7 +420,7 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
 <!-- FOOTER -->
 <footer>
   <div style="display:flex;align-items:center;gap:12px">
-    <img src="jawsai911-logo2.jpeg" class="footer-logo" alt="JAWSAI911">
+    <img src="jawsai911-logo-dark-nav.jpeg" class="footer-logo" alt="JAWSAI911">
     <div>
       <div style="font-size:13px;font-weight:800;color:var(--text)">JAWSAI911.com</div>
       <div style="font-size:11px;color:var(--dim)">Bryan Jaworski © 2026 · South Florida</div>
@@ -458,25 +438,7 @@ function checkPortal(target){const v=document.getElementById('portal-pass').valu
 document.getElementById('portal-overlay').addEventListener('click',function(e){if(e.target===this)closePortal()});
 function copyTemplate(btn){const text=document.getElementById('email-template').innerText;const done=()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Email';btn.classList.remove('copied')},2500)};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));}else{fallbackCopy(text,done);}}
 function fallbackCopy(text,done){const t=document.createElement('textarea');t.value=text;t.setAttribute('readonly','');t.style.position='fixed';t.style.left='-9999px';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);done();}
-async function submitDemoRequest(e){
-  e.preventDefault();
-  const form=e.target;
-  const status=document.getElementById('landing-form-status');
-  const button=form.querySelector('button');
-  const body=Object.fromEntries(new FormData(form).entries());
-  button.disabled=true;button.textContent='Submitting...';status.style.color='var(--teal)';status.textContent='';
-  try{
-    const res=await fetch('/api/demo-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(!res.ok) throw new Error('request failed');
-    form.reset();
-    status.textContent='Request received. I will follow up directly.';
-  }catch(err){
-    status.style.color='#f87171';
-    status.textContent='Could not submit. Email sharknotgoldfish@gmail.com directly.';
-  }finally{
-    button.disabled=false;button.textContent='Submit';
-  }
-}
+
 </script>
 <script>
 /* ── HERO CANVAS ANIMATION ── */

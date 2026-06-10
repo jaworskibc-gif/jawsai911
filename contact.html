@@ -283,13 +283,28 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
   .feature-cards{grid-template-columns:1fr}
   .fc:nth-child(odd){border-right:none}
 }
+
+.lead-form-card{position:relative;max-width:760px;margin:36px auto 0;background:rgba(3,12,25,0.82);border:1px solid rgba(42,123,214,0.46);border-radius:14px;padding:22px;text-align:left;box-shadow:0 0 30px rgba(0,91,255,0.15),inset 0 0 26px rgba(10,68,140,0.18)}
+.lead-form-card h3{font-size:18px;color:#fff;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;text-align:center}
+.lead-form-card p{font-size:13px;color:#9fb2d0;margin-bottom:16px;text-align:center}
+.lead-form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.lead-form input,.lead-form select,.lead-form textarea{width:100%;background:rgba(8,18,34,0.9);border:1px solid rgba(59,130,246,0.28);border-radius:7px;color:#fff;padding:11px 12px;font-family:inherit;font-size:13px;outline:none}
+.lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{border-color:var(--sky);box-shadow:0 0 0 2px rgba(56,189,248,0.08)}
+.lead-form select{cursor:pointer}
+.lead-form textarea{min-height:58px;resize:vertical}
+.lead-form .full{grid-column:1/-1}
+.lead-form button{grid-column:1/-1;background:linear-gradient(180deg,#0877ff,#0052dc);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;cursor:pointer;padding:13px}
+.lead-form button:hover{background:#0862f0}
+.form-status{font-size:12px;color:var(--teal);margin-top:10px;min-height:18px;text-align:center}
+@media(max-width:560px){.lead-form{grid-template-columns:1fr}.lead-form .full{grid-column:1}}
+
 </style>
 </head>
 <body>
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo-wrap">
-    <img src="jawsai911-logo2.jpeg" class="nav-logo-img" alt="JAWSAI911">
+    <img src="jawsai911-logo-dark-nav.jpeg" class="nav-logo-img" alt="JAWSAI911">
     <div class="nav-logo-text">
       <div class="nav-logo-name">JAWS<span>AI</span>911</div>
       <div class="nav-logo-sub">AI Incident Command Center</div>
@@ -304,7 +319,7 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <a href="contact.html" class="nav-cta">Request Demo</a>
+    <a href="#demo-form" class="nav-cta">Request Demo</a>
   </div>
 </nav>
 <!-- PORTAL MODAL -->
@@ -328,15 +343,37 @@ footer{background:#000;border-top:1px solid rgba(59,130,246,0.12);padding:24px 4
     <p>Open to AI operations, AI adoption, implementation, and customer success roles — remote preferred, results guaranteed. Also available for CCM platform demos.</p>
     <div class="contact-links">
       <a href="mailto:sharknotgoldfish@gmail.com" class="cl cl-primary">sharknotgoldfish@gmail.com</a>
-      <a href="mailto:jaworskibc@gmail.com" class="cl cl-demo">Request a Demo</a>
+      <a href="#demo-form" class="cl cl-demo">Schedule Demo</a>
+      <a href="ai-education-class.html" class="cl cl-demo">Free AI Class</a>
       <a href="#" class="cl cl-secondary" onclick="openPortal();return false">⚙ CRM Portal</a>
+    </div>
+
+    <div class="lead-form-card" id="demo-form">
+      <h3>Schedule a Demo</h3>
+      <p>Tell me who you are, whether you use AI now, and what you want fixed.</p>
+      <form class="lead-form" onsubmit="submitDemoRequest(event)">
+        <input name="name" type="text" placeholder="Name *" required>
+        <input name="email" type="email" placeholder="Email *" required>
+        <input name="phone" type="tel" placeholder="Phone">
+        <input name="organization" type="text" placeholder="Company / Agency">
+        <select name="ai_currently" aria-label="Do you currently use AI?">
+          <option value="">Using AI currently?</option>
+          <option value="yes">Yes</option>
+          <option value="some">A little / testing</option>
+          <option value="no">No</option>
+        </select>
+        <textarea name="ai_use_case" placeholder="If yes, what are you using AI for?"></textarea>
+        <textarea class="full" name="need" placeholder="What do you need help with?"></textarea>
+        <button type="submit">Submit Demo Request</button>
+      </form>
+      <div class="form-status" id="demo-form-status"></div>
     </div>
   </div>
 </div>
 <!-- FOOTER -->
 <footer>
   <div style="display:flex;align-items:center;gap:12px">
-    <img src="jawsai911-logo2.jpeg" class="footer-logo" alt="JAWSAI911">
+    <img src="jawsai911-logo-dark-nav.jpeg" class="footer-logo" alt="JAWSAI911">
     <div>
       <div style="font-size:13px;font-weight:800;color:var(--text)">JAWSAI911.com</div>
       <div style="font-size:11px;color:var(--dim)">Bryan Jaworski © 2026 · South Florida</div>
@@ -354,6 +391,26 @@ function checkPortal(target){const v=document.getElementById('portal-pass').valu
 document.getElementById('portal-overlay').addEventListener('click',function(e){if(e.target===this)closePortal()});
 function copyTemplate(btn){const text=document.getElementById('email-template').innerText;const done=()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy Email';btn.classList.remove('copied')},2500)};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));}else{fallbackCopy(text,done);}}
 function fallbackCopy(text,done){const t=document.createElement('textarea');t.value=text;t.setAttribute('readonly','');t.style.position='fixed';t.style.left='-9999px';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);done();}
+
+async function submitDemoRequest(e){
+  e.preventDefault();
+  const form=e.target;
+  const status=document.getElementById('demo-form-status');
+  const button=form.querySelector('button');
+  const body=Object.fromEntries(new FormData(form).entries());
+  button.disabled=true;button.textContent='Submitting...';status.style.color='var(--teal)';status.textContent='';
+  try{
+    const res=await fetch('/api/demo-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(!res.ok) throw new Error('request failed');
+    form.reset();
+    status.textContent='Request received. I will follow up directly.';
+  }catch(err){
+    status.style.color='#f87171';
+    status.textContent='Could not submit. Email sharknotgoldfish@gmail.com directly.';
+  }finally{
+    button.disabled=false;button.textContent='Submit Demo Request';
+  }
+}
 </script>
 </body>
 </html>
